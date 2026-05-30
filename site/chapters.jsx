@@ -158,7 +158,11 @@ function CompanyChapter() {
         <div className="team-grid">
           {c.team.map((m, i) => (
             <Reveal className="member" key={i} delay={i * 60}>
-              <div className="portrait"><span className="ph-l">PORTRAIT</span></div>
+              <div className={`portrait${m.photo ? ' has-photo' : ''}`}>
+                {m.photo
+                  ? <img src={m.photo} alt={m.name} />
+                  : <span className="ph-l">PORTRAIT</span>}
+              </div>
               <div>
                 <div className="m-name">{m.name}</div>
                 <div className="m-role">{m.role}</div>

@@ -177,6 +177,12 @@ img { display: block; }
 .member .portrait::after { content: '◹'; position: absolute; top: 12px; right: 14px; color: var(--mt-graphite); font-size: 13px; }
 .member .portrait .ph-l { position: absolute; left: 14px; bottom: 12px; font-family: var(--mt-font-mono);
   font-size: 11px; letter-spacing: 0.1em; color: var(--mt-graphite); }
+/* real headshot: fill the portrait frame, drop the placeholder texture/glyph */
+.member .portrait.has-photo { background-image: none; }
+.member .portrait.has-photo::after { display: none; }
+.member .portrait img { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center; filter: grayscale(100%) contrast(1.04); }
+.member .portrait img:hover { filter: none; }
 .member .m-name { font-family: var(--mt-font-display); font-weight: 600; font-size: 22px; }
 .member .m-role { font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mt-ash); margin-top: 3px; }
 .credential { display: flex; align-items: center; gap: 16px; margin-top: 44px; flex-wrap: wrap;

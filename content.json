@@ -106,7 +106,7 @@
     "headline": "Engineers, not slideware.",
     "lead": "MTIVE works at the intersection of edge AI, autonomous systems, and cyber-physical security — and ships systems built to operate, not to demo.",
     "team": [
-      { "name": "Name 1", "role": "Role · Discipline" },
+      { "name": "Aras", "role": "CTO · AI & Product Engineering", "photo": "/assets/Aras.jpeg" },
       { "name": "Name 2", "role": "Role · Discipline" },
       { "name": "Name 3", "role": "Role · Discipline" },
       { "name": "Name 4", "role": "Role · Discipline" }
