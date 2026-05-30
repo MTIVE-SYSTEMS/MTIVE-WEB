@@ -1,0 +1,292 @@
+/* =============================================================
+   MTIVE — Colors & Type
+   Dark, technical, restrained. Black canvas. Neutral grotesque.
+   Monochrome. Square corners. Generous space. No decoration.
+   Reference register: Anduril / Helsing — confident understatement.
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Big Shoulders — strong industrial display face (provided by the brand).
+   Text optical for body, 60pt optical for display. */
+@font-face { font-family:'Big Shoulders'; src:url('fonts/BigShoulders-Light.ttf') format('truetype');     font-weight:300; font-display:swap; }
+@font-face { font-family:'Big Shoulders'; src:url('fonts/BigShoulders-Regular.ttf') format('truetype');   font-weight:400; font-display:swap; }
+@font-face { font-family:'Big Shoulders'; src:url('fonts/BigShoulders-Medium.ttf') format('truetype');    font-weight:500; font-display:swap; }
+@font-face { font-family:'Big Shoulders'; src:url('fonts/BigShoulders-SemiBold.ttf') format('truetype');  font-weight:600; font-display:swap; }
+@font-face { font-family:'Big Shoulders'; src:url('fonts/BigShoulders-Bold.ttf') format('truetype');      font-weight:700; font-display:swap; }
+@font-face { font-family:'Big Shoulders'; src:url('fonts/BigShoulders-ExtraBold.ttf') format('truetype'); font-weight:800; font-display:swap; }
+@font-face { font-family:'Big Shoulders'; src:url('fonts/BigShoulders-Black.ttf') format('truetype');     font-weight:900; font-display:swap; }
+@font-face { font-family:'Big Shoulders Display'; src:url('fonts/BigShoulders_60pt-Medium.ttf') format('truetype');   font-weight:500; font-display:swap; }
+@font-face { font-family:'Big Shoulders Display'; src:url('fonts/BigShoulders_60pt-SemiBold.ttf') format('truetype'); font-weight:600; font-display:swap; }
+@font-face { font-family:'Big Shoulders Display'; src:url('fonts/BigShoulders_60pt-Bold.ttf') format('truetype');     font-weight:700; font-display:swap; }
+@font-face { font-family:'Big Shoulders Display'; src:url('fonts/BigShoulders_60pt-ExtraBold.ttf') format('truetype'); font-weight:800; font-display:swap; }
+@font-face { font-family:'Big Shoulders Display'; src:url('fonts/BigShoulders_60pt-Black.ttf') format('truetype');    font-weight:900; font-display:swap; }
+
+:root {
+  /* ------- CORE PALETTE — monochrome ---------------------------- */
+  --mt-black:        #000000;   /* canvas, default bg               */
+  --mt-ink:          #0A0A0A;   /* near-black surfaces              */
+  --mt-surface:      #111111;   /* raised panels / cards            */
+  --mt-surface-2:    #161616;   /* nested panels                    */
+  --mt-line:         #1F1F1F;   /* hairline dividers on dark        */
+  --mt-line-2:       #2A2A2A;   /* emphasized dividers              */
+  --mt-steel:        #3A3A3A;   /* muted interactive / disabled bg  */
+  --mt-graphite:     #555555;   /* tertiary text on dark            */
+  --mt-ash:          #8A8A8A;   /* secondary text on dark           */
+  --mt-bone:         #C8C8C8;   /* de-emphasized body on dark       */
+  --mt-white:        #FFFFFF;   /* primary fg / geometry            */
+
+  /* ------- BLUE — RESERVED, NOT FOR GENERAL UI ----------------- */
+  /* Held only for genuine secure / intel surfaces. Do NOT use as a
+     decorative accent, link colour, or button fill in normal UI.
+     The system is monochrome by default. */
+  --mt-blue-deep:    #1E2A44;
+  --mt-blue:         #3E5A8C;
+  --mt-blue-soft:    #8AA8D6;
+  --mt-blue-mist:    #C9D6EC;
+
+  /* ------- SEMANTIC — STATUS (rare, quiet) --------------------- */
+  /* Used as a small 6px dot + mono label, almost never as a fill or
+     border. Two hues only. */
+  --mt-alert:        #C4453C;   /* critical only                    */
+  --mt-cleared:      #5E8F76;   /* verified / armed                 */
+
+  /* ------- FOREGROUND / BACKGROUND SEMANTICS ------------------- */
+  --mt-fg-1:   var(--mt-white);    /* primary text, headings         */
+  --mt-fg-2:   var(--mt-bone);     /* body                           */
+  --mt-fg-3:   var(--mt-ash);      /* secondary / metadata           */
+  --mt-fg-4:   var(--mt-graphite); /* hint / disabled                */
+  --mt-bg-1:   var(--mt-black);    /* canvas                         */
+  --mt-bg-2:   var(--mt-ink);      /* surface                        */
+  --mt-bg-3:   var(--mt-surface);  /* raised                         */
+  --mt-bg-4:   var(--mt-surface-2);/* nested                         */
+  --mt-border: var(--mt-line);
+  --mt-border-strong: var(--mt-line-2);
+
+  /* ------- TYPE FAMILIES --------------------------------------- */
+  /* Big Shoulders carries the brand's industrial strength. Display
+     optical for headlines; text optical for body. Mono for labels. */
+  --mt-font-display: 'Big Shoulders Display', 'Big Shoulders', 'Oswald', Impact, sans-serif;
+  --mt-font-body:    'Big Shoulders', 'Oswald', system-ui, sans-serif;
+  --mt-font-mono:    'JetBrains Mono', 'IBM Plex Mono', 'Menlo', monospace;
+
+  /* ------- TYPE SCALE (industrial, condensed display) --------- */
+  --mt-fs-display:  clamp(64px, 8vw, 132px);
+  --mt-fs-h1:       clamp(44px, 5vw, 76px);
+  --mt-fs-h2:       clamp(32px, 3.4vw, 52px);
+  --mt-fs-h3:       26px;
+  --mt-fs-h4:       19px;
+  --mt-fs-body:     17px;
+  --mt-fs-small:    14px;
+  --mt-fs-eyebrow:  12px;
+  --mt-fs-mono:     13px;
+
+  --mt-lh-tight:   1.0;
+  --mt-lh-display: 0.93;
+  --mt-lh-body:    1.5;
+  --mt-lh-mono:    1.5;
+
+  --mt-tracking-display:  -0.01em;
+  --mt-tracking-head:     -0.005em;
+  --mt-tracking-body:      0;
+  --mt-tracking-eyebrow:   0.18em;
+  --mt-tracking-mono:      0.01em;
+
+  /* ------- GEOMETRY — square ----------------------------------- */
+  --mt-radius-0: 0px;    /* default                               */
+  --mt-radius-1: 1px;    /* hairline rounding, rarely used        */
+  --mt-radius-2: 2px;    /* max on inputs                         */
+
+  /* ------- SPACING (4px grid; rhythm is generous) -------------- */
+  --mt-space-1:  4px;
+  --mt-space-2:  8px;
+  --mt-space-3:  12px;
+  --mt-space-4:  16px;
+  --mt-space-5:  24px;
+  --mt-space-6:  32px;
+  --mt-space-7:  48px;
+  --mt-space-8:  64px;
+  --mt-space-9:  96px;
+  --mt-space-10: 128px;
+  --mt-space-11: 180px;   /* section rhythm — air is the point      */
+
+  /* ------- BORDERS --------------------------------------------- */
+  --mt-stroke-hair:  1px;
+  --mt-stroke-reg:   1px;
+  --mt-stroke-bold:  1.5px;
+
+  /* ------- MOTION ---------------------------------------------- */
+  --mt-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --mt-ease-enter:    cubic-bezier(0.16, 1, 0.3, 1);
+  --mt-ease-exit:     cubic-bezier(0.7, 0, 0.84, 0);
+  --mt-dur-fast:    140ms;
+  --mt-dur-std:     260ms;
+  --mt-dur-slow:    520ms;
+}
+
+/* ============== SEMANTIC ELEMENTS ============================= */
+
+html, body {
+  background: var(--mt-bg-1);
+  color: var(--mt-fg-1);
+  font-family: var(--mt-font-body);
+  font-size: var(--mt-fs-body);
+  line-height: var(--mt-lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headlines are UPPERCASE — Big Shoulders is built for it and
+   it carries the brand's strength. Body, leads, and UI stay sentence
+   case so the page reads calm. Hierarchy = size + weight + case. */
+h1, .mt-h1 {
+  font-family: var(--mt-font-display);
+  font-weight: 700;
+  font-size: var(--mt-fs-h1);
+  line-height: var(--mt-lh-tight);
+  letter-spacing: var(--mt-tracking-display);
+  text-transform: uppercase;
+  margin: 0;
+}
+h2, .mt-h2 {
+  font-family: var(--mt-font-display);
+  font-weight: 700;
+  font-size: var(--mt-fs-h2);
+  line-height: var(--mt-lh-tight);
+  letter-spacing: var(--mt-tracking-display);
+  text-transform: uppercase;
+  margin: 0;
+}
+h3, .mt-h3 {
+  font-family: var(--mt-font-display);
+  font-weight: 600;
+  font-size: var(--mt-fs-h3);
+  line-height: 1.05;
+  letter-spacing: 0;
+  margin: 0;
+}
+h4, .mt-h4 {
+  font-family: var(--mt-font-display);
+  font-weight: 600;
+  font-size: var(--mt-fs-h4);
+  line-height: 1.2;
+  letter-spacing: 0;
+  margin: 0;
+}
+p, .mt-body {
+  font-size: var(--mt-fs-body);
+  line-height: var(--mt-lh-body);
+  color: var(--mt-fg-2);
+  margin: 0;
+}
+.mt-display {
+  font-family: var(--mt-font-display);
+  font-weight: 800;
+  font-size: var(--mt-fs-display);
+  line-height: var(--mt-lh-display);
+  letter-spacing: var(--mt-tracking-display);
+  text-transform: uppercase;
+}
+.mt-lead {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--mt-fg-2);
+  font-weight: 400;
+}
+
+/* The one technical signal: a small mono label / index. Used
+   sparingly — a section marker, a spec key, an id. */
+.mt-eyebrow {
+  font-family: var(--mt-font-mono);
+  font-size: var(--mt-fs-eyebrow);
+  letter-spacing: var(--mt-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--mt-fg-3);
+  font-weight: 400;
+}
+code, .mt-mono {
+  font-family: var(--mt-font-mono);
+  font-size: var(--mt-fs-mono);
+  letter-spacing: var(--mt-tracking-mono);
+  color: var(--mt-fg-2);
+}
+hr, .mt-rule {
+  border: 0;
+  border-top: var(--mt-stroke-hair) solid var(--mt-border);
+  margin: var(--mt-space-7) 0;
+}
+
+/* ============== PRIMITIVES ===================================== */
+
+/* Buttons are quiet and square. Sentence case, a hair of tracking,
+   1px geometry. Hover inverts — no glow, no colour shift. */
+.mt-btn {
+  font-family: var(--mt-font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--mt-white);
+  color: var(--mt-black);
+  border: var(--mt-stroke-reg) solid var(--mt-white);
+  padding: 12px 24px;
+  border-radius: var(--mt-radius-0);
+  cursor: pointer;
+  transition: background var(--mt-dur-fast) var(--mt-ease-standard),
+              color var(--mt-dur-fast) var(--mt-ease-standard),
+              border-color var(--mt-dur-fast) var(--mt-ease-standard);
+}
+.mt-btn:hover { background: transparent; color: var(--mt-white); }
+.mt-btn:active { background: var(--mt-bone); border-color: var(--mt-bone); color: var(--mt-black); }
+
+.mt-btn--ghost {
+  background: transparent;
+  color: var(--mt-white);
+  border-color: var(--mt-line-2);
+}
+.mt-btn--ghost:hover { background: var(--mt-white); color: var(--mt-black); border-color: var(--mt-white); }
+
+/* A text link with a low-key underline. Monochrome. */
+.mt-link {
+  color: var(--mt-white);
+  text-decoration: none;
+  border-bottom: 1px solid var(--mt-line-2);
+  padding-bottom: 2px;
+  transition: border-color var(--mt-dur-fast) var(--mt-ease-standard);
+}
+.mt-link:hover { border-bottom-color: var(--mt-white); }
+
+/* Tag / pill — hairline, mono, no colour by default. */
+.mt-tag {
+  font-family: var(--mt-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 9px;
+  border: 1px solid var(--mt-line-2);
+  color: var(--mt-fg-3);
+}
+/* Status is a dot + label, not a coloured chip. */
+.mt-status { display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mt-fg-3); }
+.mt-status::before { content: ''; width: 6px; height: 6px; background: var(--mt-fg-3); }
+.mt-status--live::before  { background: var(--mt-cleared); }
+.mt-status--alert::before { background: var(--mt-alert); }
+
+.mt-input {
+  font-family: var(--mt-font-body);
+  font-size: 16px;
+  background: transparent;
+  color: var(--mt-white);
+  border: 0;
+  border-bottom: 1px solid var(--mt-line-2);
+  padding: 12px 0;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--mt-dur-fast) var(--mt-ease-standard);
+}
+.mt-input::placeholder { color: var(--mt-graphite); }
+.mt-input:focus { border-bottom-color: var(--mt-white); }
+
+::selection { background: var(--mt-white); color: var(--mt-black); }
