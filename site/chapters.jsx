@@ -1,4 +1,7 @@
 /* MTIVE site — the 7 chapters + footer (Direction C, hi-fi) */
+import React from 'react';
+import { useExitOffset, usePinProgress, useEnterProgress, REDUCE, ScrubText } from './scroll.jsx';
+import { Reveal, MotionLines, ChapterMeta, EdgeLoop, scrollToId } from './parts.jsx';
 const { useRef: useRefCh } = React;
 
 function HeroChapter() {
@@ -219,7 +222,7 @@ function SiteFooter() {
       <div className="wrap">
         <div className="footer-grid">
           <div className="footer-brand">
-            <div className="fb-top"><img src="assets/mark-white.png" alt="MTIVE" /><span className="wm">MTIVE</span></div>
+            <div className="fb-top"><img src="/assets/mark-white.png" alt="MTIVE" /><span className="wm">MTIVE</span></div>
             <p>GPS-denied command and control for contested environments.</p>
           </div>
           <div className="footer-col">
@@ -240,4 +243,4 @@ function SiteFooter() {
   );
 }
 
-Object.assign(window, { HeroChapter, ProblemChapter, CapabilityChapter, TechnologyChapter, WhyChapter, CompanyChapter, ContactChapter, SiteFooter });
+export { HeroChapter, ProblemChapter, CapabilityChapter, TechnologyChapter, WhyChapter, CompanyChapter, ContactChapter, SiteFooter };

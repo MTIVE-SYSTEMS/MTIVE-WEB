@@ -1,4 +1,5 @@
 /* MTIVE site — shared parts: reveal, motion-lines, nav, chapter rail, edge-loop diagram */
+import React from 'react';
 const { useState, useEffect, useRef, useCallback } = React;
 
 const CHAPTERS = [
@@ -102,7 +103,7 @@ function Nav({ stuck, activeId }) {
     <nav className={`nav ${stuck ? 'is-stuck' : ''}`}>
       <div className="wrap nav-inner">
         <a className="nav-brand" onClick={() => scrollToId('home')} style={{ cursor: 'pointer' }}>
-          <img src="assets/mark-white.png" alt="MTIVE" />
+          <img src="/assets/mark-white.png" alt="MTIVE" />
           <span className="wm">MTIVE</span>
         </a>
         <div className="nav-links">
@@ -219,4 +220,4 @@ function EdgeLoop({ progress = null, motion = true }) {
   );
 }
 
-Object.assign(window, { CHAPTERS, NAV, scrollToId, Reveal, MotionLines, ChapterMeta, Nav, ChapterNav, EdgeLoop, LOOP });
+export { CHAPTERS, NAV, scrollToId, Reveal, MotionLines, ChapterMeta, Nav, ChapterNav, EdgeLoop, LOOP };

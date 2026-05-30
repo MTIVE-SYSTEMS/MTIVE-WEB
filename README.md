@@ -25,29 +25,43 @@ panel (motion, scroll-snap, halftone field).
 
 ## Tech
 
-Static site — no build step. React 18 + Babel Standalone are loaded from CDN and
-the JSX is transpiled in the browser. Open `index.html` (serve over HTTP so the
-fonts and `fetch`-loaded scripts resolve):
+**Vite + React 18.** JSX is compiled ahead of time (no in-browser Babel), so the
+production bundle ships only the minified React runtime.
 
 ```bash
-python3 -m http.server 8000
-# → http://localhost:8000
+npm install      # install dependencies
+npm run dev      # dev server with HMR  → http://localhost:5173
+npm run build    # production build      → dist/
+npm run preview  # serve the built dist/ locally
 ```
+
+## Deployment (Vercel)
+
+Zero config beyond the standard React/Vite preset:
+
+| Setting          | Value           |
+| ---------------- | --------------- |
+| Framework Preset | Vite            |
+| Build Command    | `npm run build` |
+| Output Directory | `dist`          |
+| Install Command  | `npm install`   |
 
 ## Structure
 
 ```
-index.html          entry; loads styles + JSX modules
+index.html          Vite entry (loads /site/app.jsx as a module)
+vite.config.js      Vite + @vitejs/plugin-react
 tokens.css          design tokens (color, type, spacing, motion)
 site/
   styles.css        Direction C layout + edge-loop diagram styles
   scroll.jsx        scroll-scrub engine (parallax, pin progress, scrub text)
   parts.jsx         Reveal, Nav, ChapterNav, animated EdgeLoop
   chapters.jsx      the seven chapters + footer
-  app.jsx           app shell: sticky nav, active-chapter tracking, Tweaks
+  app.jsx           entry module: app shell, nav state, mounts <App>, imports CSS
   tweaks-panel.jsx  floating dev-tweaks panel (hidden in production)
-assets/             brand mark + halftone field
-fonts/              Big Shoulders (text + 60pt display opticals)
+public/
+  assets/           brand mark + halftone field  → served at /assets
+  fonts/            Big Shoulders opticals        → served at /fonts
 ```
 
 ## Open items

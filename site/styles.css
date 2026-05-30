@@ -100,7 +100,7 @@ img { display: block; }
   scroll-snap-align: start; padding: 96px 0 64px; }
 .hero-bg { position: absolute; inset: -2% -2% -2% -2%; z-index: 0; will-change: transform;
   background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.78) 60%, #000 100%),
-    url('../assets/halftone-background.jpg') center/cover no-repeat; }
+    url('/assets/halftone-background.jpg') center/cover no-repeat; }
 .no-field .hero-bg { background: #000; }
 .hero-bg::after { content: ''; position: absolute; inset: 0;
   background: radial-gradient(120% 90% at 50% 30%, transparent 40%, rgba(0,0,0,0.6) 100%); }
@@ -185,7 +185,7 @@ img { display: block; }
 /* ============== CONTACT / CLOSING ============== */
 .closing { position: relative; overflow: hidden; }
 .closing .hero-bg { background: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%),
-  url('../assets/halftone-background.jpg') center/cover no-repeat; opacity: 0.85; }
+  url('/assets/halftone-background.jpg') center/cover no-repeat; opacity: 0.85; }
 .no-field .closing .hero-bg { background: #000; }
 .closing .wrap { position: relative; z-index: 2; }
 .closing h2 { font-family: var(--mt-font-display); font-weight: 800; text-transform: uppercase;

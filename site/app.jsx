@@ -1,4 +1,13 @@
 /* MTIVE site — app shell: nav state, active-chapter tracking, Tweaks */
+import React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import './styles.css';
+import { useTweaks, TweaksPanel, TweakSection, TweakToggle } from './tweaks-panel.jsx';
+import { CHAPTERS, Nav, ChapterNav } from './parts.jsx';
+import {
+  HeroChapter, ProblemChapter, CapabilityChapter, TechnologyChapter,
+  WhyChapter, CompanyChapter, ContactChapter, SiteFooter,
+} from './chapters.jsx';
 const { useState: useS, useEffect: useE, useRef: useR } = React;
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{

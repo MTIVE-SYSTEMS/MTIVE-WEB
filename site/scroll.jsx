@@ -2,6 +2,7 @@
    Pure scroll-event + requestAnimationFrame math (no IntersectionObserver,
    which does not fire reliably in some embed harnesses).
    Every hook degrades to a finished/neutral state under reduced-motion. */
+import React from 'react';
 const { useState: useStateS, useEffect: useEffectS, useRef: useRefS } = React;
 
 const REDUCE = (typeof window !== 'undefined' && window.matchMedia)
@@ -99,4 +100,4 @@ function ScrubText({ text, as = 'h2', className = '', style }) {
   );
 }
 
-Object.assign(window, { REDUCE, clamp01, usePinProgress, useEnterProgress, useExitOffset, ScrubText });
+export { REDUCE, clamp01, usePinProgress, useEnterProgress, useExitOffset, ScrubText };
