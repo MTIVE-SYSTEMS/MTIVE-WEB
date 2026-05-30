@@ -46,6 +46,21 @@ Zero config beyond the standard React/Vite preset:
 | Output Directory | `dist`          |
 | Install Command  | `npm install`   |
 
+## Editing content
+
+All site copy — headlines, body text, the team list, the edge-loop labels,
+nav links, the contact email, footer text — lives in a single file:
+**`content.json`** at the repo root. Edit the string values there, commit, and
+push; Vercel redeploys automatically. You don't need to touch any JSX.
+
+- Keep the JSON **structure** intact (keys and array shapes); only change the
+  values. Run `npm run build` locally first if you want to confirm it's valid.
+- **Team:** replace the four `Name N` / `Role · Discipline` entries under
+  `company.team`. Add or remove array items to change the count.
+- **Contact email** is `contact.email` — it updates the link, the button, and
+  the `mailto:` in one place.
+- Images and fonts are not in `content.json` — drop those in `public/`.
+
 ## Structure
 
 ```

@@ -1,23 +1,10 @@
 /* MTIVE site — shared parts: reveal, motion-lines, nav, chapter rail, edge-loop diagram */
 import React from 'react';
+import content from '../content.json';
 const { useState, useEffect, useRef, useCallback } = React;
 
-const CHAPTERS = [
-  { id: 'home',       idx: '01', label: 'Home' },
-  { id: 'problem',    idx: '02', label: 'Problem' },
-  { id: 'capability', idx: '03', label: 'Capability' },
-  { id: 'technology', idx: '04', label: 'Technology' },
-  { id: 'why',        idx: '05', label: 'Why MTIVE' },
-  { id: 'company',    idx: '06', label: 'Company' },
-  { id: 'contact',    idx: '07', label: 'Contact' },
-];
-const NAV = [
-  { id: 'home', label: 'Home' },
-  { id: 'capability', label: 'Capability' },
-  { id: 'technology', label: 'Technology' },
-  { id: 'company', label: 'Company' },
-  { id: 'contact', label: 'Contact' },
-];
+const CHAPTERS = content.chapters;
+const NAV = content.nav.links;
 
 function scrollToId(id) {
   const el = document.getElementById(id);
@@ -104,7 +91,7 @@ function Nav({ stuck, activeId }) {
       <div className="wrap nav-inner">
         <a className="nav-brand" onClick={() => scrollToId('home')} style={{ cursor: 'pointer' }}>
           <img src="/assets/mark-white.png" alt="MTIVE" />
-          <span className="wm">MTIVE</span>
+          <span className="wm">{content.nav.brand}</span>
         </a>
         <div className="nav-links">
           {NAV.map(n => (
@@ -112,7 +99,7 @@ function Nav({ stuck, activeId }) {
           ))}
         </div>
         <div className="nav-cta">
-          <button className="btn" style={{ fontSize: 14, padding: '10px 18px' }} onClick={() => scrollToId('contact')}>Request briefing</button>
+          <button className="btn" style={{ fontSize: 14, padding: '10px 18px' }} onClick={() => scrollToId('contact')}>{content.nav.cta}</button>
         </div>
       </div>
     </nav>
@@ -133,18 +120,9 @@ function ChapterNav({ activeId }) {
 }
 
 /* ===== Edge decision loop — SENSE → FUSE → DECIDE → ACT ===== */
-const LOOP = [
-  { k: 'STEP 01', t: 'Sense' },
-  { k: 'STEP 02', t: 'Fuse' },
-  { k: 'STEP 03', t: 'Decide' },
-  { k: 'STEP 04', t: 'Act' },
-];
-const STAGE_DESC = [
-  'Onboard sensors read the world directly — LiDAR, thermal, RGB, mmWave. No external fix required.',
-  'Readings merge into one spatial picture, on-device. Redundant inputs cover for any that drop.',
-  'The vehicle resolves its own position and next action locally. Sub-10ms, no round-trip to the rear.',
-  'Commands execute and feed straight back into sensing. The loop closes — and repeats, link or no link.',
-];
+const EDGE = content.technology.edgeLoop;
+const LOOP = EDGE.steps.map((s) => ({ k: s.k, t: s.t }));
+const STAGE_DESC = EDGE.steps.map((s) => s.desc);
 
 /* progress: number 0..1 → scroll-scrubbed; null → auto-timer (or static when motion off). */
 function EdgeLoop({ progress = null, motion = true }) {
@@ -178,15 +156,15 @@ function EdgeLoop({ progress = null, motion = true }) {
     <div className="loop-wrap">
       <div className="loop">
         <div className="loop-top">
-          <span className="lt-left"><span className="tri">▽</span> ON-DEVICE · EDGE</span>
-          <span className="lt-right">{scrub ? `STEP ${Math.min(4, activeIndex + 1)} / 4` : 'No uplink required'}</span>
+          <span className="lt-left"><span className="tri">▽</span> {EDGE.boundaryLabel}</span>
+          <span className="lt-right">{scrub ? `STEP ${Math.min(4, activeIndex + 1)} / 4` : EDGE.noUplink}</span>
         </div>
         <div className="denied" style={{ opacity: started ? 1 : 0.25 }}>
           <span className="ds-dot" />
-          <span className="ds-x">GPS / SATCOM input</span>
-          <span>denied · spoofed · gone</span>
+          <span className="ds-x">{EDGE.denied.input}</span>
+          <span>{EDGE.denied.state}</span>
           <span className="ds-rule" />
-          <span style={{ color: 'var(--mt-graphite)' }}>loop is unaffected</span>
+          <span style={{ color: 'var(--mt-graphite)' }}>{EDGE.denied.unaffected}</span>
         </div>
         <div className="loop-track">
           <div className="loop-line"><i style={{ transform: `scaleX(${baseW})` }} /></div>
@@ -203,17 +181,17 @@ function EdgeLoop({ progress = null, motion = true }) {
           ))}
         </div>
         <div className="loop-foot">
-          <span className="lf-ret" style={{ opacity: complete || !scrub ? 1 : 0.4 }}>↻ continuous</span>
+          <span className="lf-ret" style={{ opacity: complete || !scrub ? 1 : 0.4 }}>{EDGE.foot.continuous}</span>
           <span>·</span>
-          <span>sub-10ms loop</span>
+          <span>{EDGE.foot.latency}</span>
           <span>·</span>
-          <span>runs when the link to the rear is cut</span>
+          <span>{EDGE.foot.note}</span>
         </div>
       </div>
       <div className="loop-desc">
         <span key={scrub ? activeIndex : 'static'} className="loop-desc-in">
           {scrub ? STAGE_DESC[Math.max(0, Math.min(3, activeIndex))]
-                 : 'Inference and coordination happen on the vehicle, at the operational edge. The loop closes locally — no round-trip to a cloud that may not be reachable.'}
+                 : EDGE.staticDesc}
         </span>
       </div>
     </div>

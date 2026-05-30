@@ -1,0 +1,146 @@
+{
+  "_comment": "Single source of truth for all editable website copy. Edit text here, then commit + push — Vercel redeploys automatically. Structure must stay intact (keys, arrays); only change the string values. Asset/font files live in public/.",
+
+  "nav": {
+    "brand": "MTIVE",
+    "cta": "Request briefing",
+    "links": [
+      { "id": "home", "label": "Home" },
+      { "id": "capability", "label": "Capability" },
+      { "id": "technology", "label": "Technology" },
+      { "id": "company", "label": "Company" },
+      { "id": "contact", "label": "Contact" }
+    ]
+  },
+
+  "chapters": [
+    { "id": "home", "idx": "01", "label": "Home" },
+    { "id": "problem", "idx": "02", "label": "Problem" },
+    { "id": "capability", "idx": "03", "label": "Capability" },
+    { "id": "technology", "idx": "04", "label": "Technology" },
+    { "id": "why", "idx": "05", "label": "Why MTIVE" },
+    { "id": "company", "idx": "06", "label": "Company" },
+    { "id": "contact", "idx": "07", "label": "Contact" }
+  ],
+
+  "hero": {
+    "eyebrow": "GPS-Denied Command & Control",
+    "headline": { "line1": "Blind the satellites.", "line2": "We still fight." },
+    "lead": "When jamming starts and the satellites go dark, most autonomous systems become flying liabilities. MTIVE is the command and control layer that keeps allied assets coordinated, navigating, and operational when GPS is denied, spoofed, or gone.",
+    "ctaPrimary": { "label": "See the capability", "target": "capability" },
+    "ctaSecondary": { "label": "Contact", "target": "contact" },
+    "scrollHint": "Scroll · 06 below"
+  },
+
+  "problem": {
+    "metaLabel": "The Problem",
+    "headline": "Modern autonomy has a single point of failure.",
+    "lead": "Across the Baltic, the eastern flank, and every contested theatre, GPS jamming has moved from rare event to daily condition. The problem is not a lack of hardware — it is that hardware was designed to trust a signal the adversary controls, and cannot talk to each other when it is taken away.",
+    "readouts": [
+      { "idx": "01", "system": "NAV — GNSS DEPENDENT", "title": "Navigation dies with the signal.", "body": "Conventional autonomy is tethered to GNSS. Deny the satellite, and the asset is blind." },
+      { "idx": "02", "system": "C2 — FRAGMENTED", "title": "Command breaks at the seams.", "body": "National systems do not interoperate. In a coalition operation, a commander stares at six screens that do not share a picture." },
+      { "idx": "03", "system": "LOOP — DELAYED", "title": "Latency kills the loop.", "body": "Cloud-dependent decision-making introduces delay between detection and action — delay the adversary exploits." }
+    ]
+  },
+
+  "capability": {
+    "metaLabel": "The Capability",
+    "headline": "Command that does not depend on the sky.",
+    "lead": "MTIVE binds disconnected sensors and assets into one coordinated, sovereign system. It does not replace existing platforms — it keeps them fighting when the network does not.",
+    "cards": [
+      { "num": "01", "category": "NAV", "title": "GPS-Denied Navigation", "body": "SLAM and sensor-fusion based positioning. Assets navigate by what they see and sense, not by a satellite the adversary can switch off." },
+      { "num": "02", "category": "COMPUTE", "title": "Edge-Native Decision Loop", "body": "Inference and coordination happen on-device, at the operational edge. Sub-10ms response, no dependence on a cloud that may not be reachable." },
+      { "num": "03", "category": "C2", "title": "Resilient Command Layer", "body": "A coordination layer that binds heterogeneous assets into one picture — and survives the loss of any single node, including the central one." },
+      { "num": "04", "category": "COMMS", "title": "Multi-Layer Comms Resilience", "body": "Frequency hopping, multi-band fallback, and optical links engineered to hold a command path open through active electronic warfare." }
+    ]
+  },
+
+  "technology": {
+    "metaLabel": "Technology · The Edge Loop",
+    "headline": "Built for the environment, not the demo.",
+    "lead": "The stack is engineered around one assumption: the signal will be taken away. Every layer degrades gracefully and keeps operating when conditions are hostile.",
+    "stack": [
+      { "idx": "01", "title": "Edge Compute", "body": "NVIDIA Jetson-class processing for on-device inference and sensor fusion. No round-trip to a server that may not be there." },
+      { "idx": "02", "title": "Sensor Fusion", "body": "LiDAR, thermal, RGB, mmWave, and UWB fused into a single spatial picture — redundant by design." },
+      { "idx": "03", "title": "Resilient Comms", "body": "Frequency-hopping RF, multi-band fallback, free-space optical, and fiber backbone — a path held open under jamming." },
+      { "idx": "04", "title": "Hardened Software", "body": "Encrypted, authenticated middleware. Every node is treated as critical infrastructure, not a trusted endpoint." },
+      { "idx": "05", "title": "Digital Twin Validation", "body": "Fault injection and denied-signal conditions validated in a virtual theatre before anything flies." }
+    ],
+    "edgeLoop": {
+      "boundaryLabel": "ON-DEVICE · EDGE",
+      "noUplink": "No uplink required",
+      "denied": {
+        "input": "GPS / SATCOM input",
+        "state": "denied · spoofed · gone",
+        "unaffected": "loop is unaffected"
+      },
+      "foot": {
+        "continuous": "↻ continuous",
+        "latency": "sub-10ms loop",
+        "note": "runs when the link to the rear is cut"
+      },
+      "staticDesc": "Inference and coordination happen on the vehicle, at the operational edge. The loop closes locally — no round-trip to a cloud that may not be reachable.",
+      "steps": [
+        { "k": "STEP 01", "t": "Sense", "desc": "Onboard sensors read the world directly — LiDAR, thermal, RGB, mmWave. No external fix required." },
+        { "k": "STEP 02", "t": "Fuse", "desc": "Readings merge into one spatial picture, on-device. Redundant inputs cover for any that drop." },
+        { "k": "STEP 03", "t": "Decide", "desc": "The vehicle resolves its own position and next action locally. Sub-10ms, no round-trip to the rear." },
+        { "k": "STEP 04", "t": "Act", "desc": "Commands execute and feed straight back into sensing. The loop closes — and repeats, link or no link." }
+      ]
+    }
+  },
+
+  "why": {
+    "metaLabel": "Why MTIVE",
+    "headline": "Sovereign by design. Independent by necessity.",
+    "lead": "Europe is rearming, but the systems it depends on are not its own. MTIVE is the alternative: a sovereign, ITAR-free command and control layer engineered for the one condition that defines the modern battlefield — the loss of the signal.",
+    "differentiators": [
+      { "bold": "Engineered for GPS-denied operation", "rest": " as the default condition, not an edge case." },
+      { "bold": "Edge-native", "rest": " — no dependence on cloud or rear connectivity." },
+      { "bold": "Sovereign and ITAR-free", "rest": " — accessible to allied markets locked out of US systems." },
+      { "bold": "Interoperable", "rest": " — binds existing assets rather than demanding replacement." }
+    ]
+  },
+
+  "company": {
+    "metaLabel": "Company · Team",
+    "headline": "Engineers, not slideware.",
+    "lead": "MTIVE works at the intersection of edge AI, autonomous systems, and cyber-physical security — and ships systems built to operate, not to demo.",
+    "team": [
+      { "name": "Name 1", "role": "Role · Discipline" },
+      { "name": "Name 2", "role": "Role · Discipline" },
+      { "name": "Name 3", "role": "Role · Discipline" },
+      { "name": "Name 4", "role": "Role · Discipline" }
+    ],
+    "credential": { "tag": "Credential", "text": "Member, NVIDIA Inception Program" }
+  },
+
+  "contact": {
+    "metaLabel": "Contact",
+    "headline": "The grid goes down. Command stays up.",
+    "lead": "If you are building for contested environments — or investing in those who do — let us talk.",
+    "email": "operations@mtive.tech",
+    "ctaLabel": "Contact operations"
+  },
+
+  "footer": {
+    "brand": "MTIVE",
+    "tagline": "GPS-denied command and control for contested environments.",
+    "columns": [
+      {
+        "heading": "Navigate",
+        "links": [
+          { "label": "Home", "target": "home" },
+          { "label": "Capability", "target": "capability" },
+          { "label": "Technology", "target": "technology" },
+          { "label": "Company", "target": "company" },
+          { "label": "Contact", "target": "contact" }
+        ]
+      },
+      {
+        "heading": "Partnerships",
+        "links": [{ "label": "NVIDIA Inception Program" }]
+      }
+    ],
+    "bottom": { "left": "MTIVE · 2026", "right": "Autonomous. Resilient. Sovereign." }
+  }
+}
