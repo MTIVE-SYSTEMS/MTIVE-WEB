@@ -107,9 +107,7 @@
     "lead": "MTIVE works at the intersection of edge AI, autonomous systems, and cyber-physical security — and ships systems built to operate, not to demo.",
     "team": [
       { "name": "Aras", "role": "CTO · AI & Product Engineering", "photo": "/assets/Aras.jpeg" },
-      { "name": "Name 2", "role": "Role · Discipline" },
-      { "name": "Name 3", "role": "Role · Discipline" },
-      { "name": "Name 4", "role": "Role · Discipline" }
+      { "name": "Alpay", "role": "CEO · Cyber Security Lead", "photo": "/assets/Alpay.jpg" }
     ],
     "credential": { "tag": "Credential", "text": "Member, NVIDIA Inception Program" }
   },
@@ -141,6 +139,17 @@
         "links": [{ "label": "NVIDIA Inception Program" }]
       }
     ],
+    "compliance": {
+      "heading": "Registrations",
+      "groups": [
+        {
+          "heading": "Business",
+          "items": [
+            { "label": "DUNS No.", "value": "751152421" }
+          ]
+        }
+      ]
+    },
     "bottom": { "left": "MTIVE · 2026", "right": "Autonomous. Resilient. Sovereign." }
   }
 }

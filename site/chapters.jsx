@@ -222,6 +222,26 @@ function SiteFooter() {
             </div>
           ))}
         </div>
+        {c.compliance && (
+          <div className="footer-compliance">
+            <span className="eyebrow">{c.compliance.heading}</span>
+            <div className="fc-grid">
+              {c.compliance.groups.map((g) => (
+                <div className="fc-group" key={g.heading}>
+                  <span className="fc-group-head">{g.heading}</span>
+                  <dl>
+                    {g.items.map((it) => (
+                      <div className="fc-row" key={it.label}>
+                        <dt>{it.label}</dt>
+                        <dd>{it.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="footer-bar">
           <span>{c.bottom.left}</span>
           <span>{c.bottom.right}</span>
