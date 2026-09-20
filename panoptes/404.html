@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Not found — Panoptes</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@600;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --bg-1:#000000; --line:#333333; --line-2:#444444;
+    --fg-1:#ffffff; --fg-3:#a6a6a6; --fg-4:#8a8a8a; --cleared:#5e8f76;
+    --font-display:'Big Shoulders',Impact,sans-serif;
+    --font-mono:'JetBrains Mono',Menlo,monospace;
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;min-height:100vh;background:var(--bg-1);color:var(--fg-1);
+    font-family:var(--font-mono);display:flex;flex-direction:column;
+  }
+  header{border-bottom:1px solid var(--line);padding:16px 24px;}
+  .mark{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-1);text-decoration:none;}
+  .mark .dot{width:7px;height:7px;background:var(--cleared);border-radius:50%;}
+  .mark span{color:var(--fg-4);}
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px;text-align:center;}
+  .code{
+    font-family:var(--font-display);font-weight:800;text-transform:uppercase;
+    font-size:clamp(64px,16vw,160px);line-height:1;letter-spacing:-.01em;margin:0;
+  }
+  .msg{margin-top:12px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3);}
+  .btn{
+    margin-top:32px;display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:.02em;text-transform:uppercase;
+    background:var(--fg-1);color:#000;border:1px solid var(--fg-1);padding:12px 24px;text-decoration:none;
+  }
+  .btn:hover{background:transparent;color:var(--fg-1);}
+</style>
+</head>
+<body>
+  <header><a class="mark" href="/"><span class="dot"></span>MTIVE<span>/ PANOPTES</span></a></header>
+  <main>
+    <div>
+      <p class="code">404</p>
+      <p class="msg">This address does not exist.</p>
+      <a class="btn" href="/">Return to Panoptes</a>
+    </div>
+  </main>
+</body>
+</html>
