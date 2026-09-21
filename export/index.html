@@ -1,0 +1,753 @@
+<title>MTIVE Solutions</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@400;500;600;700;800;900&family=Big+Shoulders+Display:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#000000;
+    --surface-0:#121212;
+    --surface-1:#1b1b1b;
+    --surface-2:#242424;
+    --line:#333333;
+    --line-2:#444444;
+    --steel:#565656;
+    --graphite:#8a8a8a;
+    --ash:#a6a6a6;
+    --bone:#c8c8c8;
+    --white:#ffffff;
+    --cleared:#5e8f76;
+    --predicted:#b98f46;
+    --alert:#c4453c;
+    --blue:#3e5a8c;
+
+    --fg-1:var(--white);
+    --fg-2:var(--bone);
+    --fg-3:var(--ash);
+    --fg-4:var(--graphite);
+    --bg-1:var(--ink);
+    --bg-2:var(--surface-0);
+    --bg-3:var(--surface-1);
+    --bg-4:var(--surface-2);
+
+    --font-display:'Big Shoulders Display','Big Shoulders',Impact,sans-serif;
+    --font-body:'Big Shoulders',Impact,system-ui,sans-serif;
+    --font-mono:'JetBrains Mono','IBM Plex Mono',Menlo,monospace;
+
+    --ease-standard: cubic-bezier(.2,0,0,1);
+    --ease-enter: cubic-bezier(.16,1,.3,1);
+    --dur-fast:140ms;
+    --dur-std:260ms;
+
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:auto;}
+  body{
+    margin:0;
+    background:var(--bg-1);
+    color:var(--fg-1);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding-inline:0;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+  ::selection{background:var(--white);color:var(--black,#000);}
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding-inline:24px;
+  }
+  @media (min-width:720px){ .wrap{padding-inline:48px;} }
+
+  h1,h2,h3,h4{margin:0;font-family:var(--font-display);text-transform:uppercase;letter-spacing:-0.01em;}
+  h1{font-weight:800;font-size:clamp(44px,9vw,128px);line-height:0.92;}
+  h2{font-weight:800;font-size:clamp(32px,5vw,58px);line-height:0.98;}
+  h3{font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1.08;letter-spacing:0;}
+  h4{font-weight:600;font-size:19px;line-height:1.2;letter-spacing:0;text-transform:none;}
+  p{margin:0;color:var(--fg-2);}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--fg-3);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow .idx{color:var(--fg-4);}
+  .mono{font-family:var(--font-mono);letter-spacing:0.01em;}
+  .tnum{font-variant-numeric:tabular-nums;}
+
+  .lead{font-size:clamp(17px,1.6vw,21px);line-height:1.55;color:var(--fg-2);max-width:640px;}
+
+  .rule{border:0;border-top:1px solid var(--line);margin:0;}
+
+  header.site{
+    position:sticky;top:0;
+    z-index:50;
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-block:16px;
+  }
+  .mark{
+    display:flex;align-items:center;gap:10px;
+    font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--fg-1);text-decoration:none;
+  }
+  .mark b{font-weight:500;color:var(--fg-1);}
+  .mark span{color:var(--fg-4);}
+  nav.links{display:none;gap:28px;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
+  nav.links a{color:var(--fg-3);text-decoration:none;transition:color var(--dur-fast) var(--ease-standard);}
+  nav.links a:hover{color:var(--fg-1);}
+  @media (min-width:900px){ nav.links{display:flex;} }
+  /* ---------- Sections ---------- */
+  section{padding-block:96px;position:relative;}
+  section.tight{padding-block:64px;}
+  @media (min-width:900px){ section{padding-block:150px;} section.tight{padding-block:90px;} }
+  .section-head{display:flex;flex-direction:column;gap:20px;margin-bottom:56px;max-width:760px;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding-top:64px;padding-bottom:100px;border-bottom:1px solid var(--line);}
+  @media (min-width:900px){ .hero{padding-top:96px;padding-bottom:140px;} }
+  .hero-eyebrow{margin-bottom:22px;}
+  .hero h1{margin-bottom:20px;}
+  .hero h1 em{font-style:normal;color:var(--fg-4);}
+  .hero .tagline{
+    font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+    font-size:clamp(19px,2.6vw,32px);letter-spacing:.005em;color:var(--fg-1);
+    margin:0 0 28px;padding-bottom:22px;border-bottom:1px solid var(--line-2);max-width:600px;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px;}
+
+  .btn{
+    font-family:var(--font-display);
+    font-size:15px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;
+    background:var(--white);color:#000;
+    border:1px solid var(--white);
+    padding:13px 26px;
+    cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+    transition:background var(--dur-fast) var(--ease-standard),color var(--dur-fast) var(--ease-standard);
+  }
+  .btn:hover{background:transparent;color:var(--white);}
+  .btn.ghost{background:transparent;color:var(--fg-1);border-color:var(--line-2);}
+  .btn.ghost:hover{background:var(--white);color:#000;border-color:var(--white);}
+
+  /* ---------- Cards / grid ---------- */
+  .grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr);}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr);}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr);}
+  @media (max-width:900px){ .grid.cols-4{grid-template-columns:repeat(2,1fr);} .grid.cols-3{grid-template-columns:repeat(1,1fr);} }
+  @media (max-width:560px){ .grid.cols-4{grid-template-columns:1fr;} .grid.cols-2{grid-template-columns:1fr;} }
+  .cell{background:var(--bg-1);padding:28px 24px;display:flex;flex-direction:column;gap:12px;}
+  .cell .n{font-family:var(--font-mono);font-size:12px;color:var(--fg-4);}
+  .cell h4{color:var(--fg-1);}
+  .cell p{font-size:15px;color:var(--fg-3);}
+  .tag{
+    font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--fg-4);border:1px solid var(--line-2);padding:4px 8px;align-self:flex-start;
+  }
+
+  /* ---------- Stat tiles ---------- */
+  .stat-tile{background:var(--bg-1);padding:32px 24px;display:flex;flex-direction:column;gap:6px;}
+  .stat-tile .figure{font-family:var(--font-display);font-weight:800;font-size:clamp(36px,4.2vw,58px);line-height:1;color:var(--fg-1);}
+  .stat-tile .unit{font-family:var(--font-mono);font-size:13px;color:var(--fg-4);}
+  .stat-tile .cap{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);margin-top:6px;}
+
+  /* ---------- Tables ---------- */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);}
+  table{width:100%;border-collapse:collapse;min-width:520px;font-size:14px;}
+  thead th{
+    text-align:left;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--fg-4);font-weight:400;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--bg-2);
+  }
+  tbody td{padding:13px 16px;border-bottom:1px solid var(--line);color:var(--fg-2);}
+  tbody tr:last-child td{border-bottom:0;}
+  td.num,th.num{text-align:right;font-family:var(--font-mono);}
+  td.delta{color:var(--cleared);font-family:var(--font-mono);}
+
+  /* ---------- Bars ---------- */
+  .barset{display:flex;flex-direction:column;gap:18px;}
+  .bar-row{display:grid;grid-template-columns:100px 1fr 70px;align-items:center;gap:14px;}
+  @media (max-width:560px){ .bar-row{grid-template-columns:76px 1fr 60px;gap:10px;} }
+  .bar-row .lbl{font-family:var(--font-mono);font-size:12px;color:var(--fg-3);}
+  .bar-track{height:10px;background:var(--bg-3);position:relative;overflow:hidden;}
+  .bar-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:var(--fg-1);}
+  .bar-fill.v3{background:var(--cleared);}
+  .bar-row .val{font-family:var(--font-mono);font-size:13px;text-align:right;color:var(--fg-1);}
+
+  /* ---------- Callouts ---------- */
+  .callout{border:1px solid var(--line-2);background:var(--bg-2);padding:22px 24px;display:flex;flex-direction:column;gap:8px;}
+  .callout .cap{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-4);}
+  .callout p{font-size:14.5px;color:var(--fg-3);}
+  .callout.warn{border-color:var(--predicted);}
+  .callout.warn .cap{color:var(--predicted);}
+
+  /* ---------- Tracker demo ---------- */
+  .tracker-shell{
+    display:grid;grid-template-columns:1.2fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+  }
+  @media (max-width:860px){ .tracker-shell{grid-template-columns:1fr;} }
+  .tracker-stage{
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/40px 40px,
+      var(--bg-1);
+    position:relative;
+    min-height:340px;
+    overflow:hidden;
+  }
+  .tracker-box{
+    position:absolute;
+    width:120px;height:170px;
+    border:2px solid var(--cleared);
+    transition:left .5s var(--ease-standard), top .5s var(--ease-standard), border-color .3s linear;
+  }
+  .tracker-box.st-predicted{border-color:var(--predicted);border-style:dashed;}
+  .tracker-box.st-lost{border-color:var(--alert);border-style:dashed;opacity:.85;}
+  .tracker-tag{
+    position:absolute;top:-30px;left:-2px;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    padding:4px 8px;white-space:nowrap;
+    background:var(--cleared);color:#0a0a0a;
+  }
+  .tracker-box.st-predicted .tracker-tag{background:var(--predicted);color:#0a0a0a;}
+  .tracker-box.st-lost .tracker-tag{background:var(--alert);color:#fff;}
+  .tracker-panel{background:var(--bg-1);padding:32px 28px;display:flex;flex-direction:column;gap:22px;justify-content:center;}
+  .tstate-row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--line);}
+  .tstate-row:first-child{border-top:0;}
+  .tstate-row .marker{width:11px;height:11px;margin-top:4px;flex:none;}
+  .tstate-row .marker.m-cleared{background:var(--cleared);}
+  .tstate-row .marker.m-predicted{border:1.5px dashed var(--predicted);background:transparent;}
+  .tstate-row .marker.m-alert{border:1.5px dashed var(--alert);background:transparent;}
+  .tstate-row.active{background:var(--bg-2);margin:0 -12px;padding:14px 12px;}
+  .tstate-row h4{font-size:15px;text-transform:uppercase;letter-spacing:.04em;}
+  .tstate-row p{font-size:13.5px;color:var(--fg-4);margin-top:4px;}
+
+  /* ---------- Roadmap stack ---------- */
+  .stack{display:flex;flex-direction:column-reverse;gap:1px;background:var(--line);border:1px solid var(--line);max-width:640px;}
+  .stack .layer{background:var(--bg-1);padding:20px 22px;display:flex;align-items:center;gap:16px;}
+  .stack .layer .n{font-family:var(--font-mono);font-size:12px;color:var(--fg-4);width:20px;flex:none;}
+  .stack .layer .t{display:flex;flex-direction:column;gap:2px;}
+  .stack .layer h4{font-size:16px;}
+  .stack .layer p{font-size:13px;color:var(--fg-4);}
+  .stack .layer.built{border-left:3px solid var(--cleared);}
+  .stack .layer.partial{border-left:3px dashed var(--predicted);}
+  .stack .layer.missing{border-left:3px dashed var(--line-2);}
+  .stack .layer.missing h4,.stack .layer.missing .n{color:var(--fg-4);}
+
+  /* ---------- Position table verdict ---------- */
+  blockquote.verdict{
+    margin:0;border-left:3px solid var(--fg-1);padding:6px 0 6px 24px;
+    font-family:var(--font-display);font-weight:600;font-size:clamp(20px,2.6vw,30px);
+    line-height:1.2;color:var(--fg-1);letter-spacing:-.005em;text-transform:none;
+  }
+
+  /* ---------- Limits list ---------- */
+  ul.limits{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;}
+  ul.limits li{
+    display:grid;grid-template-columns:20px 1fr;gap:14px;
+    padding:18px 0;border-top:1px solid var(--line);font-size:15px;color:var(--fg-3);
+  }
+  ul.limits li:first-child{border-top:0;}
+  ul.limits li{overflow-wrap:anywhere;}
+  ul.limits li::before{content:'';display:block;width:8px;height:8px;border:1.5px solid var(--line-2);margin-top:5px;}
+
+  footer{border-top:1px solid var(--line);padding-block:56px;}
+  .foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;align-items:flex-start;}
+  .foot-col{display:flex;flex-direction:column;gap:10px;min-width:180px;}
+  .foot-col h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-4);}
+  .foot-col a{font-family:var(--font-mono);font-size:13px;color:var(--fg-3);text-decoration:none;}
+  .foot-col a:hover{color:var(--fg-1);}
+  .foot-bottom{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:var(--font-mono);font-size:12px;color:var(--fg-4);}
+
+  .reveal{opacity:1;}
+
+  /* ---------- Ambient background ---------- */
+  .bg-field{position:fixed;inset:0;overflow:hidden;pointer-events:none;}
+  .bg-dot{position:absolute;width:3px;height:3px;margin:-1.5px 0 0 -1.5px;border-radius:50%;background:var(--fg-4);opacity:.05;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+    .bg-field{display:none;}
+  }
+</style>
+
+<div class="bg-field" id="bgField" aria-hidden="true">
+</div>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="mark" href="#top"><b>MTIVE</b></a>
+    <nav class="links">
+      <a href="#platform">Panoptes</a>
+      <a href="#smartpatrol">SmartPatrol360</a>
+      <a href="#detection">Detection</a>
+      <a href="#tracking">Tracking</a>
+      <a href="#position">Position</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="paper.html" target="_blank" rel="noopener">Full report &nearr;</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow hero-eyebrow" data-reveal><span class="idx">MTIVE SOLUTIONS</span></div>
+      <h1 data-reveal>Autonomous. Resilient. Sovereign.</h1>
+      <p class="tagline" data-reveal>Sovereign autonomy at the edge.</p>
+      <p class="lead" data-reveal>MTIVE Solutions builds GPS-denied autonomous ISR systems that eliminate human exposure in high-risk security environments. Zero cloud dependency. Zero trust architecture. Built for contested environments where legacy systems fail.</p>
+      <div class="hero-actions" data-reveal>
+        <a class="btn" href="#platform">See Panoptes</a>
+        <a class="btn ghost" href="#smartpatrol">See SmartPatrol360</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="platform" class="tight">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow"><span class="idx">01</span> Flagship platform &mdash; Panoptes</div>
+        <h2>Four channels. One picture.</h2>
+        <p class="lead">Warfare with unfair advantage: Panoptes is MTIVE's flagship sensing platform for dismounted personnel, named for Argus Panoptes, the all-eyed giant. Sensing beyond what eyes and ears pick up alone, fused into a single display output. No channel below is built into hardware yet. Each is scoped honestly against what it can and can not do today.</p>
+      </div>
+      <div class="grid cols-4" data-reveal>
+        <div class="cell">
+          <span class="n mono">CH.1</span>
+          <h4>Camera</h4>
+          <p>Feeds Vigil, the shared detector. The only channel with real, measured performance behind it — covered in full in the technical report.</p>
+          <span class="tag">Software — shipped</span>
+        </div>
+        <div class="cell">
+          <span class="n mono">CH.2</span>
+          <h4>Motion</h4>
+          <p>Frame-differencing and optical flow. Catches subtle movement — disturbed grass, a shifted branch — too slow or small for a human eye to register.</p>
+          <span class="tag">Software — concept</span>
+        </div>
+        <div class="cell">
+          <span class="n mono">CH.3</span>
+          <h4>IR / thermal</h4>
+          <p>Scans continuously, whether or not it is shown on the display. No thermal hardware is currently owned; a fusion concept was tested on synthetic data only.</p>
+          <span class="tag">Concept — not built</span>
+        </div>
+        <div class="cell">
+          <span class="n mono">CH.4</span>
+          <h4>UWB radar</h4>
+          <p>Planned, not built. Directional, front-mounted, aimed with the cameras — for through-wall presence and breathing detection at a range affordable radar can actually reach.</p>
+          <span class="tag">Concept — not built</span>
+        </div>
+      </div>
+      <p style="margin-top:20px;font-size:13.5px;color:var(--fg-4);max-width:640px;" data-reveal>Output concept: a solid box marks a confirmed detection. A dashed or differently colored box marks an unconfirmed signal — motion-only or radar-only. An alert layer decides what actually interrupts view; sensors scan constantly, the display stays quiet until something earns attention.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="smartpatrol" class="tight">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow"><span class="idx">02</span> Second platform &mdash; SmartPatrol360</div>
+        <h2>Autonomy that keeps working when the network doesn't.</h2>
+        <p class="lead">SmartPatrol360 is MTIVE's GPS-denied autonomous ISR platform: visual-odometry and SLAM navigation, edge-native sensor fusion, and a one-operator-to-many-drone model, built to keep operating when satellite positioning, comms, or a centralized network are degraded or denied.</p>
+      </div>
+      <div class="grid cols-3" data-reveal>
+        <div class="cell">
+          <span class="n mono">01</span>
+          <h4>GNSS-denied navigation</h4>
+          <p>Visual odometry and SLAM keep the platform operating in GNSS-denied zones, enclosed facilities, and dense urban environments where GPS-dependent drones lose positional stability.</p>
+        </div>
+        <div class="cell">
+          <span class="n mono">02</span>
+          <h4>Edge-native compute</h4>
+          <p>An NVIDIA Jetson AGX Orin handles inference and sensor fusion on-device, cutting the latency a cloud round-trip would add between detection and response.</p>
+        </div>
+        <div class="cell">
+          <span class="n mono">03</span>
+          <h4>LiDAR + thermal fusion</h4>
+          <p>3D LiDAR perception combined with low-light and thermal sensing pipelines for day and night operation.</p>
+        </div>
+        <div class="cell">
+          <span class="n mono">04</span>
+          <h4>Secure comms</h4>
+          <p>COFDM-based links with FHSS-enabled resilience and hardware-based entropy generation for encryption.</p>
+        </div>
+        <div class="cell">
+          <span class="n mono">05</span>
+          <h4>1:N operator model</h4>
+          <p>One operator supervising a coordinated fleet, instead of the conventional near-1:1 pilot-to-drone ratio.</p>
+        </div>
+        <div class="cell">
+          <span class="n mono">06</span>
+          <h4>Digital-twin validation</h4>
+          <p>Built and stress-tested in NVIDIA Omniverse and Isaac Sim before physical deployment.</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:32px;max-width:760px;" data-reveal>
+        <span class="cap">Honest status</span>
+        <p>SmartPatrol360 is at TRL 4: validated in Isaac Sim simulation, not yet demonstrated in physical field deployment. MTIVE's technical track is supported by acceptance into the NVIDIA Inception Program — a technical-enablement relationship, not a commercial partnership.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="detection" class="tight">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow"><span class="idx">03</span> Detection, measured</div>
+        <h2>Panoptes sees first.</h2>
+        <p class="lead">Vigil, the detector at Panoptes' core, is anchor-free and NMS-free-at-export, trained from scratch for this project and benchmarked this week on two real, held-out evaluation sets &mdash; not asserted. Full methodology, hardware constraints, and every honest caveat live in the technical report.</p>
+      </div>
+      <div class="grid cols-3" data-reveal>
+        <div class="stat-tile">
+          <span class="figure tnum">+<span data-count="14.2" data-decimals="1">0</span>%</span>
+          <span class="unit">relative mAP gain</span>
+          <span class="cap">Latest generation, OpenImages</span>
+        </div>
+        <div class="stat-tile">
+          <span class="figure tnum" data-count="260" data-decimals="0">0</span>
+          <span class="unit">FPS throughput</span>
+          <span class="cap">3.84ms, batch 1, RX 7900 XT</span>
+        </div>
+        <div class="stat-tile">
+          <span class="figure tnum">0ms</span>
+          <span class="unit">added latency</span>
+          <span class="cap">The accuracy gain is free</span>
+        </div>
+      </div>
+      <div class="hero-actions" style="margin-top:32px;" data-reveal>
+        <a class="btn ghost" href="paper.html" target="_blank" rel="noopener">Read the full technical report &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="tracking">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow"><span class="idx">04</span> Honest tracking, not oversold claims</div>
+        <h2>A box does not vanish. It is timed.</h2>
+        <p class="lead">"Box vanished on screen means a person is hiding" was rejected as a claim before any code was written — unfalsifiable on video, and the weak leg of the concept. What is built instead: a tracker that holds identity through a real occlusion, in three honestly labeled states.</p>
+      </div>
+
+      <div class="tracker-shell" data-reveal>
+        <div class="tracker-stage" id="stage">
+          <div class="tracker-box" id="trackerBox"><span class="tracker-tag" id="trackerTag">Confirmed</span></div>
+        </div>
+        <div class="tracker-panel">
+          <div class="tstate-row" id="row-cleared"><span class="marker m-cleared"></span><div><h4>Confirmed</h4><p>Solid green. Seen this frame — a live, current detection.</p></div></div>
+          <div class="tstate-row" id="row-predicted"><span class="marker m-predicted"></span><div><h4>Predicted</h4><p>Dashed amber. Holding identity through a gap it is not currently seeing.</p></div></div>
+          <div class="tstate-row" id="row-lost"><span class="marker m-alert"></span><div><h4>Lost — <span class="tnum" id="lostTimer">00</span>s</h4><p>Dashed red with an elapsed counter. Not seen since the tracker's patience ran out — last known position, stated plainly.</p></div></div>
+        </div>
+      </div>
+
+      <blockquote class="verdict" style="margin-top:48px;" data-reveal>A deliberately weaker, more defensible claim than most comparable pitches make. Made on purpose.</blockquote>
+
+      <div class="callout" style="margin-top:32px;max-width:760px;" data-reveal>
+        <span class="cap">Verified, not assumed</span>
+        <p>An early Panoptes-vs-YOLO comparison auto-selected whichever track had the most hits per model independently — silently comparing two different moments in the same clip. Caught, root-caused, and fixed by anchoring both backends to one manually-verified event. Corrected finding: Panoptes held the subject across 74 confirmed detections in that window; YOLOv11n produced a single low-confidence flicker during a motion-blurred pan. The methodology fix mattered more than the number.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="position">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow"><span class="idx">05</span> Position relative to adjacent systems</div>
+        <h2>Not a map app. The layer under it.</h2>
+      </div>
+      <div class="tbl-wrap" data-reveal>
+        <table>
+          <thead><tr><th>System</th><th>What it does</th><th>What it does not do</th></tr></thead>
+          <tbody>
+            <tr><td>ATAK / TAK</td><td>Shared squad map, GPS positions, manual markers, compass.</td><td>No camera. No AI detection. No automatic threat marking.</td></tr>
+            <tr><td>US Army IVAS</td><td>Map, compass, and target overlay on a HoloLens-based visor.</td><td>Large, funded military program — not a comparable point of reference.</td></tr>
+            <tr><td>Anduril EagleEye</td><td>Fuses camera, thermal, and detection into a worn overlay.</td><td>Closed, funded, hardware-complete — the closest real commercial analog.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <blockquote class="verdict" style="margin-top:40px;" data-reveal>The realistic pitch is not a map-and-HUD app — ATAK already is that, for free. It is the AI detection and honest-tracking layer that a map-and-HUD app does not have.</blockquote>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow"><span class="idx">06</span> What a detector alone can not do</div>
+        <h2>Every frame is the first frame it has ever seen.</h2>
+        <p class="lead">A detector has no concept of time. "A box that was not there yesterday" is not a hard problem for a plain detector — it is impossible for one. Three architectural gaps sit between the current detector and the platform's actual goal.</p>
+      </div>
+      <div class="stack" data-reveal>
+        <div class="layer built"><span class="n">00</span><div class="t"><h4>Detector — Vigil</h4><p>Built and measured this week. Stage one, deliberately not skipped.</p></div></div>
+        <div class="layer partial"><span class="n">·</span><div class="t"><h4>Tracking through occlusion</h4><p>Partial today, via the three-state tracker above. Substitutes for object permanence in the one-way, no-revisit case.</p></div></div>
+        <div class="layer missing"><span class="n">01</span><div class="t"><h4>Persistent memory</h4><p>"I recognize this scene, and it has changed." Nothing currently carries across frames.</p></div></div>
+        <div class="layer missing"><span class="n">02</span><div class="t"><h4>Plasticity</h4><p>Learning after deployment — a new object on site, a seasonal change — without retraining from zero.</p></div></div>
+        <div class="layer missing"><span class="n">03</span><div class="t"><h4>3-D world model</h4><p>Object permanence — a person behind a tree does not cease to exist and reappear as someone new.</p></div></div>
+      </div>
+      <p style="margin-top:24px;font-size:13.5px;color:var(--fg-4);max-width:640px;" data-reveal>The from-scratch detector was kept as stage one on purpose, not cancelled in favor of these layers — all three consume its output. Building the interesting work on top of nothing would be the worse mistake.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="limits" class="tight">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow"><span class="idx">07</span> Limitations, stated plainly</div>
+        <h2>What is not true yet.</h2>
+      </div>
+      <ul class="limits" data-reveal>
+        <li>No physical Panoptes hardware exists. The helmet, the companion platform, the drone, and the EMG bracelet are unbuilt concepts.</li>
+        <li>The drone AI pilot and the EMG gesture classifier are separate models with no data, no training run, and no scoped timeline.</li>
+        <li>UWB radar has been priced, not simulated, prototyped, or purchased. Affordable consumer radar can not achieve genuine through-wall detection at useful range — treated as a real constraint, not a detail for a future vendor.</li>
+        <li>The camera and thermal fusion test used a synthetic warm-body signal on real background imagery. No thermal hardware is currently owned.</li>
+      </ul>
+      <p style="margin-top:24px;font-size:13.5px;color:var(--fg-4);" data-reveal>Open questions specific to the detector — the o2o/o2m head gap, the COCO-versus-OpenImages person-AP split, Vigil-Motion's appearance bias — are tracked in the <a class="mono" style="color:var(--fg-3);border-bottom:1px solid var(--line-2);text-decoration:none;" href="paper.html" target="_blank" rel="noopener">technical report</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="foot-col">
+        <h4>MTIVE</h4>
+        <a href="#platform">Panoptes</a>
+        <a href="#smartpatrol">SmartPatrol360</a>
+        <a href="#detection">Detection</a>
+        <a href="#tracking">Honest tracking</a>
+        <a href="#position">Position</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#limits">Limitations</a>
+      </div>
+      <div class="foot-col">
+        <h4>Report</h4>
+        <a href="paper.html" target="_blank" rel="noopener">Full detection report &rarr;</a>
+      </div>
+      <div class="foot-col">
+        <h4>Source</h4>
+        <span class="mono" style="font-size:13px;color:var(--fg-3);">Internal benchmark pass, 2026-09-20.</span>
+        <span class="mono" style="font-size:13px;color:var(--fg-4);">RX 7900 XT / gfx1100 / ROCm.</span>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; MTIVE Solutions. Vision lab.</span>
+      <span>Sovereign autonomy at the edge.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var reduced = false;
+  try { reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) {}
+  var hasAnime = typeof anime === 'function';
+
+  // ---- hero entrance ----
+  function heroEntrance(){
+    var els = document.querySelectorAll('.hero [data-reveal]');
+    if(!els.length) return;
+    if(!hasAnime || reduced){ return; }
+    anime.set(els, {opacity:0, translateY:18});
+    anime({
+      targets: els,
+      opacity: [0,1],
+      translateY: [18,0],
+      easing: 'cubicBezier(.16,1,.3,1)',
+      duration: 700,
+      delay: anime.stagger(110, {start:80})
+    });
+  }
+
+  // ---- scroll reveals ----
+  function scrollReveals(){
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]')).filter(function(el){
+      return !el.closest('.hero');
+    });
+    if(!els.length) return;
+    if(!hasAnime || reduced || !('IntersectionObserver' in window)){ return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var el = entry.target;
+          anime.set(el, {opacity:0, translateY:16});
+          anime({ targets: el, opacity:[0,1], translateY:[16,0], duration:600, easing:'cubicBezier(.16,1,.3,1)' });
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  // ---- count-up stats ----
+  function countUps(){
+    var els = document.querySelectorAll('[data-count]');
+    if(!els.length) return;
+    var run = function(el){
+      var target = parseFloat(el.getAttribute('data-count'));
+      var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      if(!hasAnime || reduced){ el.textContent = target.toFixed(decimals); return; }
+      var obj = { v: 0 };
+      anime({
+        targets: obj, v: target, round: false,
+        duration: 1400, easing: 'easeOutCubic',
+        update: function(){ el.textContent = obj.v.toFixed(decimals); }
+      });
+    };
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ run(entry.target); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.4 });
+      els.forEach(function(el){ io.observe(el); });
+    } else {
+      els.forEach(run);
+    }
+  }
+
+  // ---- animated bars ----
+  function barFills(){
+    var els = document.querySelectorAll('.bar-fill');
+    if(!els.length) return;
+    var run = function(el){
+      var target = parseFloat(el.getAttribute('data-target')) || 0;
+      el.style.opacity = 1;
+      if(!hasAnime || reduced){ el.style.width = target + '%'; return; }
+      anime({ targets: el, width: target + '%', duration: 1100, easing: 'easeOutCubic' });
+    };
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ run(entry.target); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.4 });
+      els.forEach(function(el){ io.observe(el); });
+    } else { els.forEach(run); }
+  }
+
+  // ---- three-state tracker demo ----
+  function trackerDemo(){
+    var stage = document.getElementById('stage');
+    var box = document.getElementById('trackerBox');
+    var tag = document.getElementById('trackerTag');
+    var lostTimer = document.getElementById('lostTimer');
+    var rows = {
+      cleared: document.getElementById('row-cleared'),
+      predicted: document.getElementById('row-predicted'),
+      lost: document.getElementById('row-lost')
+    };
+    if(!stage || !box) return;
+
+    var positions = [
+      {left:'8%', top:'14%'},
+      {left:'55%', top:'10%'},
+      {left:'55%', top:'10%'},
+      {left:'30%', top:'46%'}
+    ];
+    var seq = [
+      { state:'cleared', label:'Confirmed', pos:0, dur: 2600 },
+      { state:'predicted', label:'Predicting', pos:1, dur: 2000 },
+      { state:'lost', label:'Lost', pos:2, dur: 3200 },
+      { state:'cleared', label:'Confirmed', pos:3, dur: 2600 }
+    ];
+    var i = 0;
+    var lostInterval = null;
+
+    function setActiveRow(state){
+      Object.keys(rows).forEach(function(k){
+        if(rows[k]) rows[k].classList.toggle('active', k === state);
+      });
+    }
+
+    function applyStep(step){
+      box.className = 'tracker-box' + (step.state === 'predicted' ? ' st-predicted' : step.state === 'lost' ? ' st-lost' : '');
+      tag.textContent = step.label;
+      var p = positions[step.pos];
+      box.style.left = p.left;
+      box.style.top = p.top;
+      setActiveRow(step.state);
+      if(lostInterval){ clearInterval(lostInterval); lostInterval = null; }
+      if(step.state === 'lost'){
+        var s = 0;
+        lostTimer.textContent = '00';
+        lostInterval = setInterval(function(){
+          s += 1;
+          lostTimer.textContent = (s<10?'0':'')+s;
+        }, 1000);
+      }
+    }
+
+    function loop(){
+      var step = seq[i % seq.length];
+      applyStep(step);
+      i += 1;
+      setTimeout(loop, step.dur);
+    }
+    loop();
+  }
+
+  function initBgField(){
+    var field = document.getElementById('bgField');
+    if(!field || reduced) return;
+    var spacing = 56;
+    var cols = Math.min(Math.ceil(window.innerWidth / spacing) + 1, 34);
+    var rows = Math.min(Math.ceil(window.innerHeight / spacing) + 1, 22);
+    var dots = [];
+    var frag = document.createDocumentFragment();
+    for(var r=0; r<rows; r++){
+      for(var c=0; c<cols; c++){
+        var d = document.createElement('span');
+        d.className = 'bg-dot';
+        d.style.left = (c*spacing) + 'px';
+        d.style.top = (r*spacing) + 'px';
+        frag.appendChild(d);
+        dots.push(d);
+      }
+    }
+    field.appendChild(frag);
+    if(!hasAnime) return;
+    anime({
+      targets: dots,
+      opacity: [0.05, 0.3],
+      scale: [1, 1.5],
+      easing: 'easeInOutSine',
+      duration: 1400,
+      direction: 'alternate',
+      loop: true,
+      delay: anime.stagger(60, {grid:[cols,rows], from:'center'})
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    try{ heroEntrance(); }catch(e){}
+    try{ scrollReveals(); }catch(e){}
+    try{ countUps(); }catch(e){}
+    try{ barFills(); }catch(e){}
+    try{ trackerDemo(); }catch(e){}
+    try{ initBgField(); }catch(e){}
+  });
+})();
+</script>

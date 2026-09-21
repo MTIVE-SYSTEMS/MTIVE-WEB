@@ -1,0 +1,56 @@
+<title>VIGIL / ARGUS Technical Paper</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#000000; --line:#333333; --line-2:#444444;
+    --graphite:#8a8a8a; --ash:#a6a6a6; --bone:#c8c8c8; --white:#ffffff;
+    --font-display:'Big Shoulders',Impact,sans-serif;
+    --font-mono:'JetBrains Mono',Menlo,monospace;
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink);color:var(--white);font-family:var(--font-display);}
+  .wrap{max-width:900px;margin:0 auto;padding-inline:24px;}
+  header.site{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.88);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding-block:16px;gap:16px;}
+  .mark{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--white);text-decoration:none;}
+  .mark b{font-weight:500;}
+  .mark span{color:var(--graphite);}
+  a.back{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);text-decoration:none;}
+  a.back:hover{color:var(--white);}
+  main{padding-block:48px;}
+  .eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ash);margin-bottom:14px;}
+  h1{margin:0 0 10px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;font-size:clamp(28px,5vw,44px);line-height:1.02;}
+  p.lead{margin:0 0 28px;color:var(--bone);font-size:16px;line-height:1.55;max-width:640px;}
+  .actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:32px;}
+  .btn{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;background:var(--white);color:#000;border:1px solid var(--white);padding:12px 24px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+  .btn:hover{background:transparent;color:var(--white);}
+  .btn.ghost{background:transparent;color:var(--white);border-color:var(--line-2);}
+  .btn.ghost:hover{background:var(--white);color:#000;}
+  .viewer{border:1px solid var(--line);background:#141414;}
+  .viewer embed{display:block;width:100%;height:80vh;}
+  .fallback{padding:20px;font-family:var(--font-mono);font-size:13px;color:var(--graphite);}
+</style>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="mark" href="index.html" target="_blank" rel="noopener"><b>MTIVE</b><span>/ PANOPTES</span></a>
+    <a class="back" href="index.html" target="_blank" rel="noopener">&larr; Back to Panoptes</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="eyebrow">PANOPTES / TECHNICAL PAPER</div>
+    <h1>VIGIL: a dense-convolution, dual-head detector for edge-deployed human-POV threat perception</h1>
+    <p class="lead">Full write-up of the VIGIL architecture, ARGUS v2/v3 training-run results, VIGIL-Motion fusion, and the OpenImages label-contamination finding — written up as an actual paper instead of a marketing page.</p>
+    <div class="actions">
+      <a class="btn" href="argus_vigil_paper.pdf" target="_blank" rel="noopener">Download PDF</a>
+      <a class="btn ghost" href="report.html" target="_blank" rel="noopener">Old report page &rarr;</a>
+    </div>
+    <div class="viewer">
+      <embed src="argus_vigil_paper.pdf" type="application/pdf">
+      <div class="fallback">If the embedded viewer above is blank, use the Download PDF button.</div>
+    </div>
+  </div>
+</main>
