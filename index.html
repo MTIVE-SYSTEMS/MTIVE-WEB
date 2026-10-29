@@ -1,14 +1,952 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MTIVE — GPS-Denied Command &amp; Control</title>
-<link rel="icon" type="image/png" href="/assets/mark-white.png"/>
-<link rel="apple-touch-icon" href="/assets/mark-white.png"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="MTIVE Industries">
+<meta property="og:description" content="PANOPTES: a helmet- and glasses-mounted perception system for the dismounted soldier.">
+<meta property="og:type" content="website">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>MTIVE Industries</title>
+<meta name="description" content="MTIVE Industries builds PANOPTES, a helmet- and glasses-mounted multi-sensor perception system for the dismounted soldier.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* MTIVE Design System. Dark is the website theme; one Paper band sets the rhythm, as the slides do.
+   Layout: 12-column marketing grid, 1200px max. The brand Halftone component carries the imagery:
+   a 3D sheet in the hero, the sensor views in the demo, the mark emblem on Paper. Colour only as status. */
+@font-face { font-family: 'Big Shoulders Display'; src: url('fonts/BigShoulders_60pt-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Big Shoulders Display'; src: url('fonts/BigShoulders_60pt-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Big Shoulders Display'; src: url('fonts/BigShoulders_60pt-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Big Shoulders Display'; src: url('fonts/BigShoulders_60pt-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Big Shoulders Text'; src: url('fonts/BigShoulders-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Big Shoulders Text'; src: url('fonts/BigShoulders-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+
+:root {
+  color-scheme: dark;
+  --mt-black: #000000; --mt-ink: #121212; --mt-surface: #1b1b1b; --mt-surface-2: #242424;
+  --mt-line: #333333; --mt-line-2: #444444; --mt-slate: #646464; --mt-graphite: #8c8c8c; --mt-ash: #a6a6a6;
+  --mt-bone: #c8c8c8; --mt-rule: #d9d9d5; --mt-paper-3: #e4e4e0; --mt-paper-2: #ecece9; --mt-paper: #f4f4f2; --mt-white: #ffffff;
+  --mt-fg-1: var(--mt-white); --mt-fg-2: var(--mt-bone); --mt-fg-3: var(--mt-ash); --mt-fg-4: var(--mt-graphite);
+  --mt-bg-1: var(--mt-black); --mt-bg-2: var(--mt-ink); --mt-bg-3: var(--mt-surface); --mt-bg-4: var(--mt-surface-2);
+  --mt-border: var(--mt-line); --mt-border-strong: var(--mt-line-2);
+  --mt-cleared: #4a98a0; --mt-predicted: #c9a250; --mt-alert: #c4453c;
+  --scrim-strong: rgba(0, 0, 0, 0.72); --scrim-mid: rgba(0, 0, 0, 0.5); --scrim-none: rgba(0, 0, 0, 0);
+  --mt-font-display: 'Big Shoulders Display', 'Big Shoulders', 'Oswald', Impact, sans-serif;
+  --mt-font-body: 'Big Shoulders Text', 'Big Shoulders', 'Oswald', system-ui, sans-serif;
+  --mt-font-mono: 'JetBrains Mono', 'IBM Plex Mono', Menlo, monospace;
+  --mt-fs-display: clamp(64px, 8vw, 132px); --mt-fs-h2: clamp(32px, 3.4vw, 52px);
+  --mt-fs-h3: 26px; --mt-fs-h4: 19px; --mt-fs-body: 19px; --mt-fs-eyebrow: 12px;
+  --mt-lh-display: 0.93; --mt-lh-body: 1.6;
+  --mt-tracking-display: -0.01em; --mt-tracking-body: 0.02em; --mt-tracking-eyebrow: 0.18em;
+  --mt-measure: 32em;
+  --mt-space-2: 8px; --mt-space-3: 12px; --mt-space-4: 16px; --mt-space-5: 24px; --mt-space-6: 32px;
+  --mt-space-7: 48px; --mt-space-8: 64px; --mt-space-9: 96px; --mt-space-11: 180px;
+  --mt-ease-standard: cubic-bezier(0.2, 0, 0, 1); --mt-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --mt-dur-fast: 140ms; --mt-dur-std: 260ms; --mt-dur-slow: 520ms;
+  --gutter: clamp(16px, 4.6vw, 56px);
+  --section: clamp(96px, 11vw, 180px);
+  --nav-h: 72px;
+}
+/* Paper: the same brand with the polarity reversed, for one band. */
+[data-theme="paper"] {
+  color-scheme: light;
+  --mt-fg-1: var(--mt-black); --mt-fg-2: var(--mt-surface-2); --mt-fg-3: var(--mt-line-2); --mt-fg-4: var(--mt-slate);
+  --mt-bg-1: var(--mt-white); --mt-bg-2: var(--mt-paper); --mt-bg-3: var(--mt-paper-2); --mt-bg-4: var(--mt-paper-3);
+  --mt-border: var(--mt-rule); --mt-border-strong: var(--mt-graphite);
+  --mt-cleared: #3f8790; --mt-predicted: #9a7630; --mt-alert: #b83e35;
+  background: var(--mt-bg-1); color: var(--mt-fg-1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px)); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--mt-bg-1); color: var(--mt-fg-1);
+  font-family: var(--mt-font-body); font-size: var(--mt-fs-body); line-height: var(--mt-lh-body);
+  letter-spacing: var(--mt-tracking-body); font-weight: 420; font-variation-settings: 'opsz' 10;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--mt-bg-1); }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--mt-fg-1); color: var(--mt-bg-1); }
+:focus-visible { outline: 2px solid var(--mt-fg-1); outline-offset: 2px; }
+h1, h2, h3, h4 { font-family: var(--mt-font-display); font-variation-settings: 'opsz' 72; margin: 0; color: var(--mt-fg-1); }
+h2 { font-size: var(--mt-fs-h2); font-weight: 700; line-height: 1; letter-spacing: var(--mt-tracking-display); text-transform: uppercase; text-wrap: balance; }
+h3 { font-size: var(--mt-fs-h3); font-weight: 600; line-height: 1.05; }
+h4 { font-size: var(--mt-fs-h4); font-weight: 600; line-height: 1.2; }
+p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
+.lead { font-size: 21px; line-height: 1.5; }
+.dim { color: var(--mt-fg-4); }
+.eyebrow { font-family: var(--mt-font-mono); font-variation-settings: normal; font-size: var(--mt-fs-eyebrow); letter-spacing: var(--mt-tracking-eyebrow); text-transform: uppercase; color: var(--mt-fg-3); font-weight: 400; line-height: 1.5; max-width: none; }
+.mono { font-family: var(--mt-font-mono); font-variation-settings: normal; }
+.wrap { max-width: calc(1200px + 2 * 56px); margin-inline: auto; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+.sec { padding-block: var(--section); }
+.line-top { border-top: 1px solid var(--mt-border); }
+.sec-head { display: flex; flex-direction: column; gap: var(--mt-space-5); max-width: 780px; margin-bottom: var(--mt-space-8); }
+.sec-head h2 { max-width: 16em; }
+.ht-fill { position: absolute; inset: 0; }
+
+/* buttons, links */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; line-height: 1.2;
+  font-family: var(--mt-font-display); font-variation-settings: 'opsz' 72; font-size: 16px; font-weight: 600; letter-spacing: 0.02em;
+  padding: 12px 24px; border: 1px solid var(--mt-fg-1); background: var(--mt-fg-1); color: var(--mt-bg-1); border-radius: 0; cursor: pointer;
+  transition: background var(--mt-dur-fast) var(--mt-ease-standard), color var(--mt-dur-fast) var(--mt-ease-standard), border-color var(--mt-dur-fast) var(--mt-ease-standard);
+}
+.btn:hover { background: transparent; color: var(--mt-fg-1); }
+.btn:active { background: var(--mt-fg-2); border-color: var(--mt-fg-2); color: var(--mt-bg-1); }
+.btn--ghost { background: transparent; color: var(--mt-fg-1); border-color: var(--mt-border-strong); }
+.btn--ghost:hover { background: var(--mt-fg-1); color: var(--mt-bg-1); border-color: var(--mt-fg-1); }
+.btn--sm { padding: 9px 18px; font-size: 14px; }
+.link { font-size: 17px; color: var(--mt-fg-1); border-bottom: 1px solid var(--mt-border-strong); padding-bottom: 2px; transition: border-color var(--mt-dur-fast) var(--mt-ease-standard); }
+.link:hover { border-bottom-color: var(--mt-fg-1); }
+
+/* status: shape + hue + mono label */
+.st { display: inline-flex; align-items: center; gap: var(--mt-space-2); font-family: var(--mt-font-mono); font-variation-settings: normal; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mt-fg-3); line-height: 1.4; white-space: nowrap; }
+.st::before { content: ""; width: 6px; height: 6px; flex: none; background: var(--mt-fg-4); }
+.st--ok::before { background: var(--mt-cleared); }
+.st--pend::before { background: transparent; box-shadow: inset 0 0 0 1.5px var(--mt-predicted); }
+
+/* ---------- nav ---------- */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--mt-bg-1); border-bottom: 1px solid var(--mt-border); }
+.nav-in { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: var(--mt-space-5); }
+.brand { display: inline-flex; align-items: center; gap: 12px; color: var(--mt-fg-1); flex: none; }
+.brand .mark { height: 22px; width: auto; display: block; }
+.brand .wm { height: 15px; width: auto; display: block; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { font-size: 16px; color: var(--mt-fg-3); transition: color var(--mt-dur-fast) var(--mt-ease-standard); }
+.nav-links a:hover { color: var(--mt-fg-1); }
+@media (max-width: 900px) { .nav-links { display: none; } }
+
+/* ---------- hero: the 3D halftone sheet with a floating lens ---------- */
+.hero { position: relative; isolation: isolate; overflow: clip; background: var(--mt-bg-1); }
+.hero-art { position: absolute; inset: 0; z-index: -2; }
+.no-ht .hero-art { background: url('assets/halftone-background.jpg') right top / cover no-repeat; }
+.hero-scrim { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--scrim-strong) 0%, var(--scrim-strong) 42%, var(--scrim-mid) 62%, var(--scrim-none) 84%), linear-gradient(0deg, var(--mt-bg-1) 0%, var(--scrim-none) 26%); }
+.hero-in { display: flex; flex-direction: column; align-items: flex-start; gap: var(--mt-space-5); padding-block: clamp(140px, 17vw, 240px) clamp(72px, 8vw, 120px); }
+.display { font-size: var(--mt-fs-display); font-weight: 800; line-height: var(--mt-lh-display); letter-spacing: var(--mt-tracking-display); text-transform: uppercase; text-wrap: balance; max-width: 8.6em; }
+.hero .lead { max-width: 29em; margin-top: var(--mt-space-3); }
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--mt-space-6); margin-top: var(--mt-space-5); }
+@media (max-width: 760px) {
+  .hero-scrim { background: linear-gradient(180deg, var(--scrim-none) 0, var(--scrim-none) 190px, var(--mt-bg-1) 300px); }
+  .hero-in { padding-top: 284px; }
+}
+
+
+/* ---------- system diagram ---------- */
+.sys { display: grid; grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1.25fr) 48px minmax(0, 1fr); grid-template-rows: auto 56px auto; align-items: stretch; }
+.node { border: 1px solid var(--mt-border-strong); background: var(--mt-bg-1); padding: var(--mt-space-6); display: flex; flex-direction: column; gap: var(--mt-space-4); min-width: 0; }
+.node .mount { font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mt-fg-3); }
+.node p { font-size: 17px; line-height: 1.5; color: var(--mt-fg-3); }
+.n-head { grid-column: 1; grid-row: 1; }
+.n-back { grid-column: 3; grid-row: 1; background: var(--mt-bg-2); }
+.n-hud { grid-column: 5; grid-row: 1; }
+.n-emg { grid-column: 3; grid-row: 3; }
+.arr { display: flex; align-items: center; justify-content: center; font-family: var(--mt-font-mono); font-size: 18px; color: var(--mt-fg-1); position: relative; }
+.arr::before { content: ""; position: absolute; background: var(--mt-border-strong); }
+.arr span { position: relative; background: var(--mt-bg-1); padding: 4px 2px; line-height: 1; }
+.a1, .a2 { grid-row: 1; } .a1 { grid-column: 2; } .a2 { grid-column: 4; }
+.a1::before, .a2::before { left: 0; right: 0; top: 50%; height: 1px; }
+.a3 { grid-column: 3; grid-row: 2; }
+.a3::before { top: 0; bottom: 0; left: 50%; width: 1px; }
+.a3 span { transform: rotate(-90deg); }
+.chs { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--mt-border); }
+.chs li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--mt-space-3); padding: 10px 0; border-bottom: 1px solid var(--mt-border); font-size: 17px; color: var(--mt-fg-1); }
+.chs code { font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--mt-fg-4); padding-top: 4px; }
+.node .node-note { font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mt-fg-3); line-height: 1.7; margin-top: auto; }
+@media (max-width: 1000px) {
+  .sys { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+  .n-head, .n-back, .n-hud, .n-emg, .a1, .a2, .a3 { grid-column: 1; grid-row: auto; }
+  .a1, .a2 { height: 48px; }
+  .a1::before, .a2::before { left: 50%; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .a1 span, .a2 span { transform: rotate(90deg); }
+  .a3 { display: none; }
+  .n-emg { margin-top: var(--mt-space-5); }
+}
+@media (max-width: 520px) { .node { padding: var(--mt-space-5); } }
+
+/* ---------- silent scanning ---------- */
+.scan-layout { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--mt-space-7); align-items: start; }
+@media (max-width: 1000px) { .scan-layout { grid-template-columns: minmax(0, 1fr); } }
+.scan-panel { display: flex; flex-direction: column; gap: var(--mt-space-3); min-width: 0; }
+.scan-bar { display: flex; justify-content: space-between; align-items: center; gap: var(--mt-space-3); flex-wrap: wrap; }
+.tabs { display: inline-flex; border: 1px solid var(--mt-border-strong); max-width: 100%; overflow-x: auto; }
+.tabs button {
+  font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 9px 14px; border: 0; border-radius: 0; background: transparent; color: var(--mt-fg-3); cursor: pointer; white-space: nowrap;
+  transition: background var(--mt-dur-fast) var(--mt-ease-standard), color var(--mt-dur-fast) var(--mt-ease-standard);
+}
+.tabs button + button { border-left: 1px solid var(--mt-border-strong); }
+.tabs button:hover { color: var(--mt-fg-1); }
+.tabs button[aria-selected="true"] { background: var(--mt-fg-1); color: var(--mt-bg-1); }
+.scan-count { font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mt-fg-3); }
+.scan { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--mt-border-strong); background: var(--mt-bg-1); }
+.layer, .ov { position: absolute; inset: 0; transition: opacity var(--mt-dur-std) var(--mt-ease-standard), visibility var(--mt-dur-std); }
+.layer:not(.on), .ov:not(.on) { opacity: 0; visibility: hidden; }
+@media (prefers-reduced-motion: reduce) { .layer, .ov { transition: none; } }
+.bx { position: absolute; }
+.bx--ok { border: 1.5px solid var(--mt-cleared); }
+.bx--pend { border: 1.5px dashed var(--mt-predicted); }
+.bx--raw { border: 1px solid var(--mt-fg-3); }
+.lb {
+  position: absolute; left: -1.5px; bottom: 100%; margin-bottom: 4px; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 6px; background: var(--mt-bg-1);
+  font-family: var(--mt-font-mono); font-size: 11px; line-height: 1.3; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mt-fg-1);
+}
+.bx--raw .lb { color: var(--mt-fg-2); padding: 2px 5px; }
+.bx.r .lb { left: auto; right: -1.5px; }
+.lb.below { bottom: auto; top: 100%; margin-bottom: 0; margin-top: 4px; }
+.lb .m { width: 6px; height: 6px; flex: none; }
+.bx--ok .lb .m { background: var(--mt-cleared); }
+.bx--pend .lb .m { box-shadow: inset 0 0 0 1.5px var(--mt-predicted); }
+@media (max-width: 640px) { .lb { font-size: 10px; padding: 2px 4px; } .bx--ok .lb .x, .bx--pend .lb .x { display: none; } }
+.scan-foot { display: flex; flex-wrap: wrap; gap: var(--mt-space-3) var(--mt-space-5); padding-top: var(--mt-space-2); }
+.sysmsg { font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mt-fg-4); max-width: none; }
+
+.ch-panel { border-top: 1px solid var(--mt-border-strong); padding-top: var(--mt-space-5); min-width: 0; }
+.ch-panel > div { display: flex; flex-direction: column; gap: var(--mt-space-4); }
+.ch-panel > div[hidden] { display: none; }
+.ch-panel h3 { font-size: 34px; text-transform: uppercase; font-weight: 700; letter-spacing: -0.005em; }
+.ch-panel p { font-size: 17px; line-height: 1.55; }
+.ch-panel .eyebrow { font-size: var(--mt-fs-eyebrow); line-height: 1.5; color: var(--mt-fg-3); }
+.rl { list-style: none; margin: var(--mt-space-2) 0 0; padding: 0; border-top: 1px solid var(--mt-border); }
+.rl li { padding: 14px 0; border-bottom: 1px solid var(--mt-border); display: flex; flex-direction: column; gap: 6px; }
+.rl .what { font-size: 17px; line-height: 1.35; color: var(--mt-fg-1); }
+.rl .why { font-size: 15px; line-height: 1.45; color: var(--mt-fg-3); }
+.key { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px 14px; align-items: center; margin-top: var(--mt-space-2); }
+.key span:nth-child(odd) { height: 26px; }
+.key p { font-size: 15px; line-height: 1.4; color: var(--mt-fg-3); }
+.sw--ok { border: 1.5px solid var(--mt-cleared); }
+.sw--pend { border: 1.5px dashed var(--mt-predicted); }
+
+/* ---------- ARGUS: public figures ---------- */
+.num small { font-size: 0.32em; font-weight: 600; letter-spacing: 0; margin-left: 0.1em; color: var(--mt-fg-3); }
+.num small.lt { font-size: 0.42em; margin: 0 0.08em 0 0; vertical-align: 0.5em; }
+.glance.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 760px) { .glance.g3 { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- control: the numbers ---------- */
+.glance { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--mt-border); border: 1px solid var(--mt-border); }
+.glance > div { background: var(--mt-bg-1); padding: var(--mt-space-6) var(--mt-space-6) 40px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.num { font-family: var(--mt-font-display); font-variation-settings: 'opsz' 72; font-weight: 800; font-size: clamp(88px, 10vw, 148px); line-height: 0.85; letter-spacing: -0.02em; color: var(--mt-fg-1); font-variant-numeric: tabular-nums; }
+.glance h4 { margin-top: var(--mt-space-4); }
+.glance p { font-size: 16px; line-height: 1.5; color: var(--mt-fg-3); }
+@media (max-width: 1000px) { .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .glance > div { padding: var(--mt-space-5); } }
+
+/* ---------- Paper band: company ---------- */
+.paper-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 6vw, 96px); align-items: center; margin-bottom: var(--mt-space-8); }
+.paper-head .sec-head { margin-bottom: 0; }
+.emblem { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1 / 1; justify-self: end; }
+.no-ht .emblem { display: none; }
+@media (max-width: 860px) { .paper-head { grid-template-columns: minmax(0, 1fr); } .emblem { justify-self: start; max-width: 320px; } }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--mt-border); border: 1px solid var(--mt-border); }
+.cell { background: var(--mt-bg-1); padding: var(--mt-space-6) var(--mt-space-6) 40px; display: flex; flex-direction: column; gap: var(--mt-space-4); min-width: 0; transition: background var(--mt-dur-std) var(--mt-ease-standard); }
+.cell:hover { background: var(--mt-bg-2); }
+.cell p { font-size: 17px; line-height: 1.55; color: var(--mt-fg-2); }
+@media (max-width: 860px) { .grid3 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 760px) {
+}
+
+/* ---------- contact ---------- */
+.contact-h { font-size: clamp(48px, 8vw, 120px); font-weight: 800; line-height: 0.9; margin-top: 18px; max-width: 9.5em; }
+.cols { margin-top: var(--mt-space-7); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); border-top: 1px solid var(--mt-border-strong); border-bottom: 1px solid var(--mt-border-strong); }
+.col { padding: 30px 32px 32px; border-left: 1px solid var(--mt-border); display: flex; flex-direction: column; gap: var(--mt-space-3); align-items: flex-start; min-width: 0; }
+.col:first-child { border-left: 0; padding-left: 0; }
+.col .lbl { font-family: var(--mt-font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mt-fg-3); }
+.col .val { font-family: var(--mt-font-display); font-variation-settings: 'opsz' 72; font-weight: 600; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.05; color: var(--mt-fg-1); overflow-wrap: anywhere; }
+.col .val.addr { user-select: all; }
+.mail-actions { display: flex; flex-wrap: wrap; gap: var(--mt-space-3); margin-top: var(--mt-space-3); }
+@media (max-width: 860px) {
+  .cols { grid-template-columns: minmax(0, 1fr); }
+  .col { border-left: 0; padding-left: 0; padding-right: 0; }
+  .col + .col { border-top: 1px solid var(--mt-border); }
+}
+
+/* ---------- footer ---------- */
+.foot { border-top: 1px solid var(--mt-border); padding-block: 72px 36px; }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr)); gap: var(--mt-space-7); align-items: start; }
+.foot-brand img { width: 260px; max-width: 100%; height: auto; display: block; }
+.foot ul { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.foot li { font-size: 16px; color: var(--mt-fg-3); overflow-wrap: anywhere; }
+.foot li a { transition: color var(--mt-dur-fast) var(--mt-ease-standard); }
+.foot li a:hover { color: var(--mt-fg-1); }
+.foot-bar { margin-top: 64px; }
+.foot-bar > div { border-top: 1px solid var(--mt-border); padding-top: var(--mt-space-5); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--mt-space-3); font-family: var(--mt-font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mt-fg-4); }
+@media (max-width: 860px) { .foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foot-brand { grid-column: 1 / -1; } }
+
+/* ---------- phones: bigger, brighter secondary text; larger labels and touch targets ---------- */
+@media (max-width: 600px) {
+  :root { --gutter: 20px; --nav-h: 60px; --section: 80px; }
+  .brand .mark { height: 20px; } .brand .wm { height: 13px; }
+  h2 { font-size: 34px; line-height: 1.02; }
+  .lead { font-size: 19px; line-height: 1.55; }
+  .sec-head { gap: var(--mt-space-4); margin-bottom: var(--mt-space-7); }
+  .node p, .glance p, .rl .why, .key p, .ch-panel p, .cell p, .chs li { font-size: 17px; line-height: 1.55; color: var(--mt-fg-2); }
+  .rl .what { font-size: 18px; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.12em; }
+  .st, .scan-count, .sysmsg, .node .mount, .node .node-note, .chs code, .col .lbl, .lb { font-size: 12px; letter-spacing: 0.08em; }
+  .node { padding: var(--mt-space-5) 20px; gap: var(--mt-space-3); }
+  .node h3, .cell h3 { font-size: 24px; line-height: 1.12; }
+  .tabs { display: flex; width: 100%; }
+  .tabs button { flex: 1 1 0; padding: 14px 0; font-size: 12px; }
+  .scan-bar { gap: var(--mt-space-4); }
+  .scan { width: auto; max-width: none; margin-inline: calc(-1 * var(--gutter)); border-left: 0; border-right: 0; }
+  .bx--ok .lb .x, .bx--pend .lb .x { display: none; }
+  .bx--raw .lb .x { display: inline; }
+  .scan-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 10px var(--mt-space-4); }
+  .ch-panel h3 { font-size: 30px; }
+  .glance > div { padding: var(--mt-space-5) 20px var(--mt-space-6); }
+  .num { font-size: 84px; }
+  .cell { padding: var(--mt-space-6) 20px; }
+  .emblem { max-width: 240px; justify-self: center; }
+  .contact-h { font-size: 46px; }
+  .col .val { font-size: 26px; }
+  .foot li { font-size: 17px; }
+}
+
+/* ---------- opening: hero copy waits while the mark rises, then enters (fade + short slide) ---------- */
+.hero-in > * { transition: opacity var(--mt-dur-slow) var(--mt-ease-enter), transform var(--mt-dur-slow) var(--mt-ease-enter); }
+.hero-in > * { transition-delay: 420ms; } .hero-in > :nth-child(2) { transition-delay: 490ms; } .hero-in > :nth-child(3) { transition-delay: 560ms; } .hero-in > :nth-child(4) { transition-delay: 630ms; }
+.hero-scrim { transition: opacity var(--mt-dur-slow) var(--mt-ease-enter); }
+.intro .hero-in > * { opacity: 0; transform: translateY(14px); }
+.intro .hero-scrim { opacity: 0; }
+.intro-mark .brand .mark { opacity: 0; }
+.intro-canvas { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; display: block; background: var(--mt-bg-1); animation: intro-drift 2600ms var(--mt-ease-enter) both; transition: opacity 420ms var(--mt-ease-standard); }
+.intro-canvas.out { opacity: 0; }
+@keyframes intro-drift { from { transform: scale(1.045); } to { transform: none; } }
+.mark-flyer { position: fixed; z-index: 70; color: var(--mt-fg-1); transform-origin: 0 0; pointer-events: none; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .hero-in > *, .hero-scrim { transition: none; } }
+</style>
+<script>
+/* Set the opening state before first paint; a timer guarantees the copy never stays hidden. */
+(function () {
+  try {
+    var d = document.documentElement;
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !location.hash && (window.scrollY || 0) < 40) {
+      d.classList.add('intro', 'intro-mark');
+      setTimeout(function () { d.classList.remove('intro', 'intro-mark'); }, 8000);
+    }
+  } catch (e) {}
+})();
+</script>
+
 </head>
 <body>
-<div id="root"></div>
-<script type="module" src="/site/app.jsx"></script>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="MTIVE Industries, back to top">
+      <svg class="mark" viewBox="429.35 520 1141.88 958.5" aria-hidden="true"><g fill="currentColor" fill-rule="evenodd"><path d="M982.67 520.33L982.33 520.00L705.84 520.25L429.35 520.50L566.73 758.50L704.12 996.50L839.74 1231.50L975.36 1466.50L978.93 1472.50L982.50 1478.50L982.75 999.58L983.00 520.67L982.67 520.33Z"/><path d="M1244.55 1085.50L1470.23 694.50L1519.27 609.50L1568.32 524.50L1569.77 522.25L1571.23 520.00L1294.12 520.00L1017.00 520.00L1017.00 999.20L1017.00 1478.40L1017.93 1477.45L1018.86 1476.50L1244.55 1085.50Z"/></g></svg>
+      <svg class="wm" viewBox="550 1265.98 865 356.04" aria-hidden="true"><g fill="currentColor" fill-rule="evenodd"><path d="M598.00 1566.25L598.00 1510.50L594.01 1414.00L590.01 1317.50L590.01 1312.75L590.00 1308.00L594.44 1308.00L598.88 1308.00L599.47 1308.95L600.06 1309.90L611.13 1414.20L622.20 1518.50L632.40 1569.50L642.60 1620.50L672.05 1620.50L701.50 1620.50L711.76 1570.50L722.02 1520.50L733.27 1414.50L744.52 1308.50L748.90 1308.19L753.27 1307.87L754.07 1308.69L754.86 1309.50L750.46 1415.00L746.05 1520.50L746.02 1571.25L746.00 1622.00L770.00 1622.00L794.00 1622.00L794.00 1443.99L794.00 1265.98L753.25 1266.24L712.50 1266.50L700.36 1335.50L688.22 1404.50L683.04 1489.50L677.87 1574.50L677.42 1576.75L676.96 1579.00L672.50 1579.00L668.04 1579.00L667.58 1576.75L667.12 1574.50L661.52 1490.07L655.93 1405.65L644.45 1338.57L632.97 1271.50L632.41 1268.75L631.84 1266.00L590.92 1266.00L550.00 1266.00L550.00 1444.00L550.00 1622.00L574.00 1622.00L598.00 1622.00L598.00 1566.25Z"/><path d="M925.00 1465.00L925.00 1308.00L950.50 1308.00L976.00 1308.00L976.00 1287.00L976.00 1266.00L900.50 1266.00L825.00 1266.00L825.00 1286.98L825.00 1307.97L850.75 1308.23L876.50 1308.50L876.75 1465.25L877.01 1622.00L901.00 1622.00L925.00 1622.00L925.00 1465.00Z"/><path d="M1055.00 1444.00L1055.00 1266.00L1031.00 1266.00L1007.00 1266.00L1007.00 1444.00L1007.00 1622.00L1031.00 1622.00L1055.00 1622.00L1055.00 1444.00Z"/><path d="M1234.19 1444.00L1256.89 1266.50L1256.95 1266.25L1257.00 1266.00L1232.09 1266.00L1207.18 1266.00L1206.58 1269.75L1205.98 1273.50L1194.99 1363.00L1184.01 1452.50L1180.43 1513.50L1176.85 1574.50L1176.40 1576.75L1175.96 1579.00L1171.22 1579.00L1166.47 1579.00L1162.72 1516.62L1158.96 1454.23L1147.48 1360.98L1136.00 1267.73L1136.00 1266.87L1136.00 1266.00L1110.91 1266.00L1085.82 1266.00L1086.41 1269.75L1087.00 1273.50L1109.03 1445.50L1131.07 1617.50L1131.56 1619.76L1132.04 1622.02L1171.77 1621.76L1211.49 1621.50L1234.19 1444.00Z"/><path d="M1415.00 1600.50L1415.00 1579.00L1375.50 1579.00L1336.00 1579.00L1336.00 1521.00L1336.00 1463.00L1373.00 1463.00L1410.00 1463.00L1410.00 1442.01L1410.00 1421.02L1373.25 1420.76L1336.50 1420.50L1336.50 1364.50L1336.50 1308.50L1375.75 1308.24L1415.00 1307.98L1415.00 1286.99L1415.00 1266.00L1351.50 1266.00L1288.00 1266.00L1288.00 1444.00L1288.00 1622.00L1351.50 1622.00L1415.00 1622.00L1415.00 1600.50Z"/></g></svg>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#panoptes">PANOPTES</a>
+      <a href="#scanning">Silent scanning</a>
+      <a href="#argus">ARGUS</a>
+      <a href="#control">Control</a>
+      <a href="#company">Company</a>
+    </nav>
+    <a class="btn btn--sm" href="#contact">Request briefing</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <p class="eyebrow">MTIVE Industries · PANOPTES</p>
+      <h1 class="display">Awareness beyond <span class="dim">the soldier's own senses.</span></h1>
+      <p class="lead">PANOPTES is a helmet- and glasses-mounted perception system for the dismounted soldier. Its 4 sensor channels scan without pause and resolve into a single quiet heads-up display.</p>
+      <div class="cta-row">
+        <a class="btn" href="#contact">Request briefing</a>
+        <a class="link" href="#scanning">See what each sensor sees ↘</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec line-top" id="panoptes">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Product · How PANOPTES is worn</p>
+        <h2>Sensors on the head, compute on the back.</h2>
+        <p class="lead">The helmet and glasses carry the sensors and the display. A compact unit on the back does all the processing. A bracelet on the forearm takes the commands.</p>
+      </div>
+
+      <div class="sys">
+        <div class="node n-head">
+          <span class="mount">Head · Helmet and glasses</span>
+          <h3>4 sensor channels scan the scene from the helmet and glasses.</h3>
+          <ul class="chs">
+            <li><code>CH 01</code>Cameras, eye level</li>
+            <li><code>CH 02</code>Motion</li>
+            <li><code>CH 03</code>Thermal, always on</li>
+            <li><code>CH 04</code>UWB radar, front-facing</li>
+          </ul>
+        </div>
+        <div class="arr a1" aria-hidden="true"><span>→</span></div>
+        <div class="node n-back">
+          <span class="mount">Back · Processing unit</span>
+          <h3>Onboard AI turns raw returns into a few clear marks.</h3>
+          <p>ARGUS, MTIVE's perception AI, detects people, fuses the 4 channels and decides which returns are worth interrupting the soldier's view.</p>
+          <p class="node-note">All processing on the onboard unit · No cloud · No reach-back link</p>
+        </div>
+        <div class="arr a2" aria-hidden="true"><span>→</span></div>
+        <div class="node n-hud">
+          <span class="mount">Glasses · Heads-up display</span>
+          <h3>The glasses show only what is worth the soldier's attention.</h3>
+          <p>Solid boxes for confirmed detections, dashed boxes for unconfirmed signals. Nothing else reaches the glass.</p>
+        </div>
+        <div class="arr a3" aria-hidden="true"><span>→</span></div>
+        <div class="node n-emg">
+          <span class="mount">Forearm · EMG bracelet</span>
+          <h3>A forearm bracelet turns muscle signals into commands.</h3>
+          <p>Gestures go to the processing unit. No voice, no buttons, hands stay on the weapon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec line-top" id="scanning">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Display · Silent scanning</p>
+        <h2>The display stays quiet until it matters.</h2>
+        <p class="lead">Every channel scans the same scene all the time. Open each one to see what it picks up, then compare it with what reaches the soldier's glasses.</p>
+      </div>
+
+      <div class="scan-layout">
+        <div class="scan-panel">
+          <div class="scan-bar">
+            <div class="tabs" role="tablist" aria-label="Sensor view">
+              <button type="button" role="tab" id="tab-hud" data-ch="hud" aria-selected="true" aria-controls="scan">HUD</button>
+              <button type="button" role="tab" id="tab-cam" data-ch="cam" aria-selected="false" aria-controls="scan" tabindex="-1">CAM</button>
+              <button type="button" role="tab" id="tab-mot" data-ch="mot" aria-selected="false" aria-controls="scan" tabindex="-1">MOT</button>
+              <button type="button" role="tab" id="tab-ir" data-ch="ir" aria-selected="false" aria-controls="scan" tabindex="-1">IR</button>
+              <button type="button" role="tab" id="tab-uwb" data-ch="uwb" aria-selected="false" aria-controls="scan" tabindex="-1">UWB</button>
+            </div>
+            <span class="scan-count" id="scan-count">Returns 9 · On display 3</span>
+          </div>
+
+          <div class="scan" id="scan" role="tabpanel" aria-labelledby="tab-hud">
+            <div class="layer on" data-ch="hud"></div>
+            <div class="layer" data-ch="cam"></div>
+            <div class="layer" data-ch="mot"></div>
+            <div class="layer" data-ch="ir"></div>
+            <div class="layer" data-ch="uwb"></div>
+
+            <div class="ov on" data-ch="hud" aria-hidden="true">
+              <div class="bx bx--ok" style="left:28.2%;top:33.5%;width:4.6%;height:15%"><span class="lb"><i class="m"></i>Confirmed<span class="x">· CAM + IR</span></span></div>
+              <div class="bx bx--pend" style="left:48.5%;top:61.5%;width:11%;height:8%"><span class="lb below"><i class="m"></i>Unconfirmed<span class="x">· Motion</span></span></div>
+              <div class="bx bx--pend r" style="left:73.8%;top:41%;width:6.8%;height:22%"><span class="lb"><i class="m"></i>Unconfirmed<span class="x">· Radar</span></span></div>
+            </div>
+            <div class="ov" data-ch="cam" aria-hidden="true">
+              <div class="bx bx--raw" style="left:28.2%;top:33.5%;width:4.6%;height:15%"><span class="lb">CAM<span class="x">· Person</span></span></div>
+            </div>
+            <div class="ov" data-ch="mot" aria-hidden="true">
+              <div class="bx bx--raw" style="left:48.5%;top:61.5%;width:11%;height:8%"><span class="lb">MOT<span class="x">· Movement</span></span></div>
+              <div class="bx bx--raw" style="left:7.2%;top:31.8%;width:5.6%;height:6.4%"><span class="lb">MOT<span class="x">· Held back</span></span></div>
+              <div class="bx bx--raw" style="left:45.5%;top:35.2%;width:6%;height:5.6%"><span class="lb">MOT<span class="x">· Held back</span></span></div>
+            </div>
+            <div class="ov" data-ch="ir" aria-hidden="true">
+              <div class="bx bx--raw" style="left:28.2%;top:33.5%;width:4.6%;height:15%"><span class="lb">IR<span class="x">· Body heat</span></span></div>
+              <div class="bx bx--raw" style="left:12%;top:73%;width:7%;height:8%"><span class="lb">IR<span class="x">· Held back</span></span></div>
+              <div class="bx bx--raw r" style="left:86.5%;top:22.5%;width:8%;height:12%"><span class="lb">IR<span class="x">· Held back</span></span></div>
+            </div>
+            <div class="ov" data-ch="uwb" aria-hidden="true">
+              <div class="bx bx--raw r" style="left:73.8%;top:41%;width:6.8%;height:22%"><span class="lb">UWB<span class="x">· Breathing</span></span></div>
+              <div class="bx bx--raw" style="left:57.5%;top:77%;width:5%;height:6%"><span class="lb">UWB<span class="x">· Held back</span></span></div>
+            </div>
+          </div>
+
+          <div class="scan-foot">
+            <span class="st st--ok">CAM · Scanning</span>
+            <span class="st st--ok">MOT · Scanning</span>
+            <span class="st st--ok">IR · Scanning</span>
+            <span class="st st--ok">UWB · Scanning</span>
+          </div>
+          <p class="sysmsg">Simulated scene. Illustration, not sensor footage.</p>
+        </div>
+
+        <div class="ch-panel" aria-live="polite">
+          <div data-ch="hud">
+            <p class="eyebrow">View · Heads-up display</p>
+            <h3>What the soldier sees</h3>
+            <p>The scene through the glasses, plus only what the alert layer passes. 3 of 9 returns reach the display.</p>
+            <ul class="rl">
+              <li><span class="st st--ok">Confirmed</span><span class="what">Person at the treeline</span><span class="why">Camera and thermal agree.</span></li>
+              <li><span class="st st--pend">Unconfirmed</span><span class="what">Movement in the grass</span><span class="why">Motion channel only.</span></li>
+              <li><span class="st st--pend">Unconfirmed</span><span class="what">Breathing behind the wall</span><span class="why">Radar only.</span></li>
+              <li><span class="st">Held back</span><span class="what">6 other returns</span><span class="why">Still in the scan, off the display.</span></li>
+            </ul>
+            <div class="key">
+              <span class="sw--ok" aria-hidden="true"></span><p>Solid box. Confirmed by more than 1 sensor.</p>
+              <span class="sw--pend" aria-hidden="true"></span><p>Dashed box. Unconfirmed, a single channel only.</p>
+            </div>
+          </div>
+          <div data-ch="cam" hidden>
+            <p class="eyebrow">CH 01 · CAM</p>
+            <h3>Cameras</h3>
+            <p>Eye-level cameras see from the soldier's own point of view. ARGUS, the onboard perception AI, finds people in the frame.</p>
+            <ul class="rl">
+              <li><span class="st st--ok">Confirmed</span><span class="what">Person at the treeline</span><span class="why">Thermal agrees, so the box is solid.</span></li>
+            </ul>
+          </div>
+          <div data-ch="mot" hidden>
+            <p class="eyebrow">CH 02 · MOT</p>
+            <h3>Motion</h3>
+            <p>Catches movement too slow or too small for the human eye, such as a body moving through grass.</p>
+            <ul class="rl">
+              <li><span class="st st--pend">Unconfirmed</span><span class="what">Movement in the grass</span><span class="why">No other channel agrees, so the box is dashed.</span></li>
+              <li><span class="st">Held back</span><span class="what">2 other returns</span><span class="why">Still in the scan, off the display.</span></li>
+            </ul>
+          </div>
+          <div data-ch="ir" hidden>
+            <p class="eyebrow">CH 03 · IR</p>
+            <h3>Thermal</h3>
+            <p>Always on and scanned continuously, including while the thermal image is not on the display.</p>
+            <ul class="rl">
+              <li><span class="st st--ok">Confirmed</span><span class="what">Body heat at the treeline</span><span class="why">Matches the camera detection.</span></li>
+              <li><span class="st">Held back</span><span class="what">2 other returns</span><span class="why">Still in the scan, off the display.</span></li>
+            </ul>
+          </div>
+          <div data-ch="uwb" hidden>
+            <p class="eyebrow">CH 04 · UWB</p>
+            <h3>UWB radar</h3>
+            <p>Front-facing, directional and aligned with the cameras. Detects presence and breathing through walls.</p>
+            <ul class="rl">
+              <li><span class="st st--pend">Unconfirmed</span><span class="what">Breathing behind the wall</span><span class="why">Radar only, so the box is dashed.</span></li>
+              <li><span class="st">Held back</span><span class="what">1 other return</span><span class="why">Still in the scan, off the display.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec line-top" id="argus">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">ARGUS · Measured</p>
+        <h2>ARGUS runs in real time and rarely raises a false alarm.</h2>
+        <p class="lead">Bench figures for the current model. Full test conditions and accuracy results are shared in briefings.</p>
+      </div>
+      <div class="glance g3">
+        <div><span class="num"><small class="lt">&lt;</small>5<small>ms</small></span><h4>Per camera frame</h4><p>Bench measurement on a desktop GPU.</p></div>
+        <div><span class="num">0.029</span><h4>False boxes per empty frame</h4><p>Under the 0.04 limit MTIVE set for the model.</p></div>
+        <div><span class="num"><small class="lt">~</small>70<small>%</small></span><h4>Barely-visible people found</h4><p>Nearly 7 in 10 people the eye can hardly pick out.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec line-top" id="control">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Control · EMG bracelet</p>
+        <h2>Control with both hands on the weapon.</h2>
+        <p class="lead">An EMG bracelet on the forearm reads muscle signals as gestures. There is nothing to press and nothing to say out loud.</p>
+      </div>
+      <div class="glance">
+        <div><span class="num">0</span><h4>Buttons</h4><p>Nothing to find or press.</p></div>
+        <div><span class="num">0</span><h4>Voice commands</h4><p>Nothing to say out loud.</p></div>
+        <div><span class="num">2</span><h4>Hands on the weapon</h4><p>Gestures are read at the forearm.</p></div>
+        <div><span class="num">1</span><h4>Bracelet</h4><p>Muscle signals from the forearm become commands.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="company" data-theme="paper">
+    <div class="wrap">
+      <div class="paper-head">
+        <div class="sec-head">
+          <p class="eyebrow">Company · MTIVE Industries</p>
+          <h2>Built for the person on the ground.</h2>
+          <p class="lead">MTIVE Industries is a Turkish defense technology company. It builds AI-powered perception systems that give the dismounted soldier awareness past the reach of eyes and ears.</p>
+        </div>
+        <div class="emblem" id="emblem" aria-hidden="true"></div>
+      </div>
+      <div class="grid3">
+        <article class="cell">
+          <h3>ARGUS is made completely from scratch and optimised for this mission.</h3>
+          <p>Every model is trained on data MTIVE owns, with no borrowed pretrained weights. Allied and sovereign customers get a stack with no foreign licensing strings and no export-control exposure.</p>
+        </article>
+        <article class="cell">
+          <h3>Everything runs on the soldier's own equipment.</h3>
+          <p>All processing happens in the compact unit worn on the back. PANOPTES needs no cloud and no reach-back link to work.</p>
+        </article>
+        <article class="cell">
+          <h3>PANOPTES informs the operator and never decides for them.</h3>
+          <p>Human-in-the-loop by design. It sharpens the operator's judgement and leaves every decision with the person wearing it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <p class="eyebrow">Contact · Briefings by appointment</p>
+      <h2 class="contact-h">Talk to the <span class="dim">people who build it.</span></h2>
+      <div class="cols">
+        <div class="col">
+          <span class="lbl">Briefings</span>
+          <span class="val addr" id="addr">operations@mtive.tech</span>
+          <div class="mail-actions"><a class="btn btn--sm" href="mailto:operations@mtive.tech?subject=PANOPTES%20briefing%20request">Email operations</a><button class="btn btn--ghost btn--sm" type="button" id="copy-addr">Copy address</button></div>
+        </div>
+        <div class="col">
+          <span class="lbl">CTO · AI &amp; Product Engineering</span>
+          <span class="val">Aras</span>
+        </div>
+        <div class="col">
+          <span class="lbl">CEO · Cyber Security Lead</span>
+          <span class="val">Alpay</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div class="foot-brand"><img src="banner.svg" alt="MTIVE" width="850" height="396"></div>
+    <div>
+      <p class="eyebrow">Product</p>
+      <ul><li><a href="#panoptes">PANOPTES</a></li><li><a href="#scanning">Silent scanning</a></li><li><a href="#argus">ARGUS performance</a></li><li><a href="#control">Control</a></li></ul>
+    </div>
+    <div>
+      <p class="eyebrow">Company</p>
+      <ul><li><a href="#company">Principles</a></li><li><a href="#contact">Team</a></li><li><a href="#contact">Request briefing</a></li></ul>
+    </div>
+    <div>
+      <p class="eyebrow">Reach</p>
+      <ul><li>operations@mtive.tech</li></ul>
+    </div>
+  </div>
+  <div class="wrap foot-bar"><div><span>MTIVE Industries · 2026</span><span>DUNS 751152421</span></div></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="bundle.js"></script>
+<script>
+/* Procedural, illustrative sensor views of one scene, fed to the brand Halftone.
+   Geometry is normalised (u across, v down) so the overlay boxes line up. */
+window.PanoptesScene = (function () {
+  const W = 640, H = 360, AR = W / H, HZ = 0.47;
+  const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+  const sm = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+  const hash = (x, y) => { const h = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return h - Math.floor(h); };
+  function vn(x, y) {
+    const xi = Math.floor(x), yi = Math.floor(y), u = x - xi, v = y - yi, s = t => t * t * (3 - 2 * t);
+    const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1), U = s(u), V = s(v);
+    return a + (b - a) * U + (c - a) * V + (a - b - c + d) * U * V;
+  }
+  const fbm = (x, y) => 0.55 * vn(x, y) + 0.3 * vn(x * 2.1 + 5.2, y * 2.1 + 1.3) + 0.15 * vn(x * 4.3 + 9.1, y * 4.3 + 3.7);
+  // soft ellipse blob: 1 at centre, 0 outside
+  const blob = (u, v, cu, cv, ru, rv) => { const d = Math.hypot((u - cu) / ru, (v - cv) / rv); return 1 - sm(0.35, 1, d); };
+
+  const treeH = u => (u > 0.262 && u < 0.348) ? 0.014 + 0.01 * vn(u * 60, 2) : 0.075 + 0.085 * fbm(u * 9 + 1.3, 2.7) + 0.02 * vn(u * 70, 9);
+  const inTrees = (u, v) => u < 0.70 && v < HZ + 0.004 && v > HZ - treeH(u);
+  const inWall = (u, v) => u > 0.70 && v > 0.17 && v < 0.80;
+  const inDoor = (u, v) => u > 0.80 && u < 0.855 && v > 0.50 && v < 0.80;
+  const inWindow = (u, v) => u > 0.885 && u < 0.945 && v > 0.29 && v < 0.39;
+  function person(u, v) { // soft silhouette mask 0..1
+    const cx = 0.305, top = 0.345, h = 0.13, x = (u - cx) * AR, y = v - top;
+    if (y < -0.01 || y > h + 0.005) return 0;
+    const hr = h * 0.105;
+    let d = Math.hypot(x, y - hr) - hr;
+    if (y > hr * 1.9 && y < h * 0.58) d = Math.min(d, Math.abs(x) - (h * 0.15 - (y - hr * 2) * 0.1));
+    if (y >= h * 0.58) d = Math.min(d, Math.abs(x) - h * 0.1);
+    return 1 - sm(-0.002, 0.004, d);
+  }
+  const ground = (u, v) => { // perspective furrows toward a vanishing point
+    const d = (v - HZ) / (1 - HZ), z = 1 / (d + 0.06);
+    const ang = (u - 0.42) / (d + 0.02);
+    const furrow = 0.5 + 0.5 * Math.cos(ang * 22);
+    return { d, z, furrow };
+  };
+
+  const channels = {
+    cam(u, v) {
+      if (inWall(u, v)) {
+        if (inDoor(u, v) || inWindow(u, v)) return 0.02;
+        if (u < 0.712) return 0.62;
+        return 0.3 + 0.05 * (Math.floor(v * 46) % 2) + 0.05 * vn(u * 50, v * 50);
+      }
+      const p = person(u, v);
+      let L;
+      if (v < HZ) {
+        L = 0.08 + 0.44 * Math.pow(v / HZ, 2.2);              // night sky, a glow along the horizon
+        if (inTrees(u, v)) L = 0.04 + 0.07 * fbm(u * 40, v * 30);
+      } else {
+        const g = ground(u, v);
+        L = 0.1 + 0.2 * (1 - g.d) * (0.55 + 0.45 * g.furrow) + 0.07 * fbm(u * 12, v * 30);
+      }
+      return L * (1 - p) + 0.02 * p;                         // a dark figure against the horizon glow
+    },
+    ir(u, v) {
+      let L = v < HZ ? 0.04 : 0.12 + 0.1 * ((v - HZ) / (1 - HZ)) + 0.05 * fbm(u * 10, v * 18);
+      if (inTrees(u, v)) L = 0.1 + 0.05 * fbm(u * 40, v * 30);
+      if (inWall(u, v)) L = 0.2 + 0.04 * vn(u * 30, v * 30);
+      L = Math.max(L, 0.62 * blob(u, v, 0.905, 0.285, 0.04, 0.06));   // heat source
+      L = Math.max(L, 0.7 * blob(u, v, 0.155, 0.77, 0.035, 0.04));     // heat source
+      L = Math.max(L, 0.55 * blob(u, v, 0.305, 0.41, 0.03, 0.09));     // body heat halo
+      return Math.max(L, 0.97 * person(u, v));
+    },
+    mot(u, v) {
+      let L = 0.05 * channels.cam(u, v);                     // faint reference frame
+      const trail = blob(u, v, 0.54, 0.655, 0.055, 0.035) * (vn(u * 160, v * 160) > 0.55 ? 1 : 0.25);
+      const b1 = blob(u, v, 0.10, 0.35, 0.025, 0.025) * (vn(u * 140, v * 120) > 0.6 ? 0.8 : 0.1);
+      const b2 = blob(u, v, 0.485, 0.38, 0.03, 0.025) * (vn(u * 140 + 7, v * 120) > 0.6 ? 0.8 : 0.1);
+      return Math.max(L, trail * 0.95, b1, b2);
+    },
+    uwb(u, v) {
+      const dx = (u - 0.5) * AR, dy = 1.06 - v, ang = Math.abs(Math.atan2(dx, dy));
+      let L = 0.02 + 0.2 * (1 - sm(0.9, 1.0, ang));          // front-facing field of view, aligned with the cameras
+      if (inWall(u, v) && u < 0.73) L = 0.42;                 // the wall face returns a band
+      L = Math.max(L, 0.95 * blob(u, v, 0.772, 0.52, 0.03, 0.09));    // breathing behind the wall
+      L = Math.max(L, 0.45 * blob(u, v, 0.60, 0.80, 0.025, 0.03));   // second return
+      return L;
+    }
+  };
+  channels.display = (u, v) => channels.cam(u, v) * 0.8;
+
+  const cache = {};
+  function image(kind) {
+    if (cache[kind]) return cache[kind];
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const g = c.getContext('2d'), img = g.createImageData(W, H), d = img.data, f = channels[kind];
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const l = Math.round(clamp(f((x + 0.5) / W, (y + 0.5) / H), 0, 1) * 255), i = (y * W + x) * 4;
+      d[i] = d[i + 1] = d[i + 2] = l; d[i + 3] = 255;
+    }
+    g.putImageData(img, 0, 0);
+    return (cache[kind] = c.toDataURL('image/png'));
+  }
+  return { image };
+})();
+</script>
+<script>
+(() => {
+  /* ---------- copy address ---------- */
+  const copyBtn = document.getElementById('copy-addr'), addr = document.getElementById('addr');
+  const reset = () => setTimeout(() => { copyBtn.textContent = 'Copy address'; }, 2200);
+  copyBtn.addEventListener('click', () => {
+    const fallback = () => {
+      const r = document.createRange(); r.selectNodeContents(addr);
+      const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      copyBtn.textContent = 'Address selected'; reset();
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(addr.textContent.trim()).then(() => { copyBtn.textContent = 'Address copied'; reset(); }, fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  });
+
+  /* ---------- tabs ---------- */
+  let mountLayer = () => {};
+  const COUNTS = { hud: 'Returns 9 · On display 3', cam: 'CAM · Returns 1', mot: 'MOT · Returns 3', ir: 'IR · Returns 3', uwb: 'UWB · Returns 2' };
+  const tabs = [...document.querySelectorAll('.tabs [role="tab"]')];
+  const scan = document.getElementById('scan'), count = document.getElementById('scan-count');
+  function select(ch, focus) {
+    tabs.forEach(t => { const on = t.dataset.ch === ch; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
+    scan.querySelectorAll('.layer, .ov').forEach(el => el.classList.toggle('on', el.dataset.ch === ch));
+    document.querySelectorAll('.ch-panel > div').forEach(el => { el.hidden = el.dataset.ch !== ch; });
+    scan.setAttribute('aria-labelledby', 'tab-' + ch);
+    count.textContent = COUNTS[ch];
+    mountLayer(ch);
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t.dataset.ch));
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length].dataset.ch, true);
+    });
+  });
+
+  /* ---------- the brand Halftone, from the design system bundle ---------- */
+  const NS = window.MTIVEDesignSystem_6c1254, H = NS && NS.Halftone;
+  if (!H || !window.React || !window.ReactDOM) { document.documentElement.classList.add('no-ht'); document.documentElement.classList.remove('intro', 'intro-mark'); return; }
+  const h = React.createElement;
+  const render = (el, props) => { const root = el._root || (el._root = ReactDOM.createRoot(el)); root.render(h(H, props)); };
+
+  // Hero: the brand's 3D line sheet. On load the MTIVE mark rises through it, closes into the solid
+  // emblem and flies to its place in the nav; the sheet then calms behind the headline.
+  const heroEl = document.getElementById('hero-art'), narrow = window.matchMedia('(max-width: 760px)');
+  const SHEET = { mode: 'surface', shape: 'line', warp: 0.95, wave: 600, tilt: 40 };
+  const calmProps = scale => Object.assign({}, SHEET,
+    narrow.matches ? { pitch: 5, fade: 'bottom', fadeLength: 0.45 } : { pitch: 6, fade: 'left', fadeLength: 0.5 },
+    { waveShape: 'none', renderScale: scale, 'aria-label': 'A sheet of halftone lines' });
+  const sync = (el, props) => { const r = el._root || (el._root = ReactDOM.createRoot(el)); ReactDOM.flushSync(() => r.render(h(H, props))); };
+  const frame = () => new Promise(res => requestAnimationFrame(() => requestAnimationFrame(res)));
+  const wait = ms => new Promise(res => setTimeout(res, ms));
+  const settle = () => render(heroEl, calmProps(undefined));
+  (narrow.addEventListener ? narrow.addEventListener('change', settle) : narrow.addListener(settle));
+
+  function flyer(b) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '429.35 520 1141.88 958.5'); svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    svg.setAttribute('class', 'mark-flyer'); svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = document.querySelector('.brand .mark').innerHTML;
+    Object.assign(svg.style, { left: b.left + 'px', top: b.top + 'px', width: b.width + 'px', height: b.height + 'px' });
+    document.body.appendChild(svg);
+    return svg;
+  }
+  // Runs in a worker: draws the keyframes with the design system's own Halftone renderer and
+  // hands each one back as soon as it is ready, so the page itself never stalls.
+  function introWorker() {
+    self.window = self;
+    self.document = { createElement: () => new OffscreenCanvas(1, 1) };
+    self.onmessage = e => {
+      const m = e.data;
+      try {
+        importScripts(m.bundle);
+        const H = self.MTIVEDesignSystem_6c1254 && self.MTIVEDesignSystem_6c1254.Halftone;
+        if (!H || !H.drawSurface) throw new Error('Halftone missing');
+        const { W, Hh, s, R, S, plan } = m;
+        const field = H.shapeField(W, Hh, { kind: 'mark', mask: null, x: R.shapeX, y: R.shapeY, size: R.shapeSize, angle: 0, pitch: R.pitch });
+        const src = H.sampleField();
+        const c = new OffscreenCanvas(Math.round(W * s), Math.round(Hh * s)), ctx = c.getContext('2d', { willReadFrequently: true });
+        plan.forEach(([lift, fill], i) => {
+          ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, c.width, c.height);
+          H.drawSurface(ctx, src, {
+            W, H: Hh, scale: s, theme: 'dark', shape: 'line', pitch: R.pitch, size: 1, angle: 0, contrast: 1.15, brightness: 0, invert: false,
+            warp: S.warp, wave: S.wave, fade: 'none', fadeLength: 0.6, field, toneFromShape: true, ringGap: 40, ringReach: 0.6,
+            shapeX: R.shapeX, shapeCx: R.shapeX * W, shapePx: R.shapeSize * Math.min(W, Hh), tilt: S.tilt, turn: 0,
+            lift, symmetric: true, shapeFill: fill, edge: 1
+          });
+          const box = i === plan.length - 1 ? solid(ctx, c.width, c.height) : null;
+          const bmp = c.transferToImageBitmap();
+          self.postMessage({ i, bmp, box }, [bmp]);
+        });
+      } catch (err) { self.postMessage({ error: String((err && err.message) || err) }); }
+    };
+    // Box of the solid white emblem in the last frame, in canvas px.
+    function solid(ctx, W, Hc) {
+      const d = ctx.getImageData(0, 0, W, Hc).data, B = 6;
+      let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1, n = 0;
+      for (let by = Math.floor(Hc / B * 0.1); by < Hc / B * 0.9; by++) for (let bx = Math.floor(W / B * 0.2); bx < W / B * 0.8; bx++) {
+        let sum = 0;
+        for (let y = 0; y < B; y++) for (let x = 0; x < B; x++) sum += d[((by * B + y) * W + bx * B + x) * 4];
+        if (sum / (B * B) > 238) { n++; x0 = Math.min(x0, bx); y0 = Math.min(y0, by); x1 = Math.max(x1, bx); y1 = Math.max(y1, by); }
+      }
+      return n > 20 ? { x: x0 * B, y: y0 * B, w: (x1 - x0 + 1) * B, h: (y1 - y0 + 1) * B } : null;
+    }
+  }
+  // The mark rises: keyframes arrive from the worker and play at the screen's frame rate with a
+  // dissolve between neighbours. Playback never runs ahead of what has been drawn.
+  async function intro() {
+    const doc = document.documentElement, skipOn = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+    const ic = document.createElement('canvas');
+    ic.className = 'intro-canvas'; ic.setAttribute('aria-hidden', 'true');
+    heroEl.insertAdjacentElement('afterend', ic);
+    const frames = [];
+    let done = false, raf = 0, worker = null;
+    const finish = () => {
+      if (done) return; done = true;
+      cancelAnimationFrame(raf);
+      if (worker) worker.terminate();
+      frames.forEach(f => f && f.close && f.close());
+      skipOn.forEach(t => window.removeEventListener(t, finish, true));
+      doc.classList.remove('intro', 'intro-mark');
+      document.querySelectorAll('.mark-flyer').forEach(n => n.remove());
+      ic.remove();
+      settle();
+      introRunning = false;
+      setTimeout(() => later.splice(0).forEach(fn => fn()), 300);
+    };
+    skipOn.forEach(t => window.addEventListener(t, finish, { capture: true, passive: true }));
+    try {
+      if (!window.Worker || !window.OffscreenCanvas) throw new Error('no worker canvas');
+      const rect = heroEl.getBoundingClientRect(), W = Math.round(rect.width), Hh = Math.round(rect.height);
+      const s = Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(1.2e6 / (W * Hh)));
+      ic.width = Math.round(W * s); ic.height = Math.round(Hh * s);
+      const g = ic.getContext('2d');
+      const R = { pitch: narrow.matches ? 5 : 6, shapeX: 0.5, shapeY: narrow.matches ? 0.36 : 0.46, shapeSize: narrow.matches ? 0.56 : 0.4 };
+      const plan = [[-0.6, 0], [-0.45, 0], [-0.31, 0], [-0.19, 0], [-0.08, 0], [0.02, 0], [0.11, 0], [0.19, 0], [0.25, 0], [0.3, 0], [0.3, 0.5], [0.3, 1]];
+      let box = null, failed = false;
+      const url = URL.createObjectURL(new Blob(['(' + introWorker.toString() + ')()'], { type: 'text/javascript' }));
+      worker = new Worker(url);
+      worker.onmessage = e => { const d = e.data; if (d.error) { failed = true; return; } frames[d.i] = d.bmp; if (d.box) box = d.box; };
+      worker.onerror = () => { failed = true; };
+      worker.postMessage({ bundle: new URL('bundle.js', document.baseURI).href, W, Hh, s, R, S: SHEET, plan });
+      const t0 = performance.now();
+      while (!frames[0]) {                             // too slow or no worker: show the page instead
+        if (done) return;
+        if (failed || performance.now() - t0 > 2500) { finish(); return; }
+        await wait(30);
+      }
+      g.drawImage(frames[0], 0, 0);
+      sync(heroEl, calmProps(1));                     // the calm sheet waits underneath
+      const n = plan.length - 1, D = 1900;
+      await new Promise((res, rej) => {
+        let pos = 0, last = null, stall = 0;
+        const tick = now => {
+          if (done) return res();
+          if (failed) return rej(new Error('worker failed'));
+          const dt = last === null ? 0 : Math.min(50, now - last); last = now;
+          let avail = 0; while (avail < n && frames[avail + 1]) avail++;
+          const next = Math.min(avail, pos + dt * n / D);
+          stall = next === pos && pos < n ? stall + dt : 0;
+          if (stall > 1500) return rej(new Error('too slow'));
+          pos = next;
+          const i = Math.min(n - 1, Math.floor(pos)), a = pos - i;
+          g.globalAlpha = 1; g.drawImage(frames[i], 0, 0);
+          if (a > 0.002 && frames[i + 1]) { g.globalAlpha = a; g.drawImage(frames[i + 1], 0, 0); g.globalAlpha = 1; }
+          if (pos >= n) res(); else raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+      });
+      URL.revokeObjectURL(url);
+      await wait(160); if (done) return;
+      const r = ic.getBoundingClientRect(), k = r.width / ic.width, w0 = R.shapeSize * Math.min(r.width, r.height);
+      const b = box ? { left: r.left + box.x * k, top: r.top + box.y * k, width: box.w * k, height: box.h * k }
+                    : { left: r.left + r.width * R.shapeX - w0 / 2, top: r.top + r.height * R.shapeY - w0 * 0.4, width: w0, height: w0 * 0.8 };
+      const fly = flyer(b);
+      ic.classList.add('out');                        // the risen frame dissolves into the calm sheet under the emblem
+      doc.classList.remove('intro');                  // headline and scrim enter while the emblem travels
+      const to = document.querySelector('.brand .mark').getBoundingClientRect();
+      await fly.animate([
+        { transform: 'translate(0px, 0px) scale(1, 1)' },
+        { transform: 'translate(' + (to.left - b.left) + 'px, ' + (to.top - b.top) + 'px) scale(' + (to.width / b.width) + ', ' + (to.height / b.height) + ')' }
+      ], { duration: 1000, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'forwards' }).finished;
+      finish();
+    } catch (e) { finish(); }
+  }
+  // Other halftones wait until the opening has finished, so they do not compete with it.
+  let introRunning = false;
+  const later = [];
+  const afterIntro = fn => { if (introRunning) later.push(fn); else fn(); };
+  if (document.documentElement.classList.contains('intro')) { introRunning = true; intro(); } else settle();
+
+  // Paper band: the MTIVE mark floating in black lines (the brand's small-emblem settings).
+  afterIntro(() => render(document.getElementById('emblem'), { mode: 'surface', theme: 'paper', shape: 'line', pitch: 4.5, warp: 0.6, wave: 340, tilt: 36, lift: 0.3, waveShape: 'mark', shapeY: 0.56, shapeSize: 0.48, fade: 'radial', fadeLength: 0.4, 'aria-label': 'The MTIVE mark floating in a sheet of black halftone lines' }));
+
+  // Demo: one generated scene, seen by each channel.
+  const S = window.PanoptesScene;
+  const LAYER = {
+    hud: { src: 'display', brightness: -0.08, 'aria-label': 'The scene through the glasses' },
+    cam: { src: 'cam', 'aria-label': 'Camera view' },
+    mot: { src: 'mot', 'aria-label': 'Motion channel view' },
+    ir:  { src: 'ir', shape: 'square', 'aria-label': 'Thermal view' },
+    uwb: { src: 'uwb', waveShape: 'circle', shapeX: 0.5, shapeY: 1.08, shapeSize: 0.06, ringGap: 26, ringReach: 1.8, warp: 0.35, 'aria-label': 'Radar view' }
+  };
+  const mounted = {};
+  mountLayer = function (ch) {
+    if (mounted[ch] || !S) return;
+    mounted[ch] = true;
+    const el = scan.querySelector('.layer[data-ch="' + ch + '"]'), p = LAYER[ch];
+    const pitch = scan.clientWidth < 520 ? 4 : 6;
+    render(el, Object.assign({ shape: 'dot', pitch, warp: 0, fade: 'none' }, p, { src: S.image(p.src) }));
+  };
+  const rest = ['cam', 'mot', 'ir', 'uwb'];
+  const idle = window.requestIdleCallback || (fn => setTimeout(fn, 400));
+  const next = () => { const ch = rest.shift(); if (!ch) return; mountLayer(ch); idle(next); };
+  afterIntro(() => { mountLayer('hud'); idle(next); });
+})();
+</script>
 </body>
 </html>
