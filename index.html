@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="MTIVE Industries">
-<meta property="og:description" content="PANOPTES: a helmet- and glasses-mounted perception system for the dismounted soldier.">
+<meta property="og:description" content="MTIVE Industries builds AI-powered perception systems that help the dismounted soldier take more calculated steps in a fight.">
 <meta property="og:type" content="website">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>MTIVE Industries</title>
@@ -135,6 +135,36 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
   .hero-in { padding-top: 284px; }
 }
 
+/* Naked eye vs PANOPTES: one scene, two renderings, split by a handle the visitor drags. */
+.xsec { --t: 0.5; position: relative; isolation: isolate; overflow: clip; display: flex; align-items: center; min-height: clamp(560px, 80vh, 820px); border-top: 1px solid var(--mt-border); background: var(--mt-bg-1); }
+.xsec-in { width: 100%; display: flex; flex-direction: column; gap: var(--mt-space-5); padding-block: var(--mt-space-9); pointer-events: none; }
+.xsec-in h2 { max-width: 11em; }
+.xsec-in .lead { max-width: 24em; }
+.xr-scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, var(--scrim-strong) 0%, var(--scrim-strong) calc(var(--t) * 100% - 24%), var(--scrim-none) calc(var(--t) * 100% + 1%)), linear-gradient(0deg, var(--mt-bg-1) 0%, var(--scrim-none) 16%), linear-gradient(180deg, var(--mt-bg-1) 0%, var(--scrim-none) 12%); }
+.xray { position: absolute; inset: 0; z-index: -2; --pos: 1; touch-action: pan-y; cursor: col-resize; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.xr-view { position: absolute; inset: 0; background: var(--mt-bg-1) center / cover no-repeat; }
+.xr-pan { position: absolute; inset: 0; clip-path: inset(0 0 0 calc(var(--pos) * 100%)); }
+.xr-ov { position: absolute; inset: 0; pointer-events: none; }
+.xr-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: var(--mt-bg-1); }
+.xray.tight .lb .x { display: none; }
+.xr-ov .bx.lock { animation: xr-lock 560ms var(--mt-ease-enter) both; }
+@keyframes xr-lock { from { opacity: 0; transform: scale(1.7); } 55% { opacity: 1; } to { opacity: 1; transform: none; } }
+.xr-line { position: absolute; top: 0; bottom: 0; left: calc(var(--pos) * 100%); width: 1px; margin-left: -0.5px; background: var(--mt-fg-1); pointer-events: none; }
+.xr-tag { position: absolute; top: 22px; padding: 3px 7px; background: var(--mt-bg-1); white-space: nowrap; font-family: var(--mt-font-mono); font-size: 11px; line-height: 1.3; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mt-fg-3); }
+.xr-tag.l { right: 10px; } .xr-tag.r { left: 10px; color: var(--mt-fg-1); }
+.xr-grip { position: absolute; top: 50%; left: calc(var(--pos) * 100%); width: 42px; height: 42px; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; border: 1px solid var(--mt-fg-1); background: var(--mt-bg-1); color: var(--mt-fg-1); font-family: var(--mt-font-mono); font-size: 18px; line-height: 1; cursor: grab; transition: background var(--mt-dur-fast) var(--mt-ease-standard), color var(--mt-dur-fast) var(--mt-ease-standard); }
+.xr-grip:hover, .xray.drag .xr-grip { background: var(--mt-fg-1); color: var(--mt-bg-1); }
+.xray.drag, .xray.drag .xr-grip { cursor: grabbing; }
+.xr-cap { position: absolute; right: var(--gutter); bottom: 22px; padding: 3px 7px; background: var(--mt-bg-1); font-family: var(--mt-font-mono); font-size: 11px; line-height: 1.3; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mt-fg-3); max-width: none; pointer-events: none; }
+@media (max-width: 760px) {
+  .xsec { display: flex; flex-direction: column; align-items: stretch; min-height: 0; }
+  .xsec-in { order: 0; padding-block: var(--section) var(--mt-space-6); }
+  .xray { order: 1; position: relative; inset: auto; height: 340px; flex: none; }
+  .xr-scrim { background: linear-gradient(180deg, var(--mt-bg-1) 0%, var(--scrim-none) 10%, var(--scrim-none) 84%, var(--mt-bg-1) 100%); }
+  .xr-tag { top: 12px; }
+  .xr-cap { right: auto; left: 12px; bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .xr-ov .bx.lock { animation: none; } }
 
 /* ---------- system diagram ---------- */
 .sys { display: grid; grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1.25fr) 48px minmax(0, 1fr); grid-template-rows: auto 56px auto; align-items: stretch; }
@@ -252,7 +282,7 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
 }
 
 /* ---------- contact ---------- */
-.contact-h { font-size: clamp(48px, 8vw, 120px); font-weight: 800; line-height: 0.9; margin-top: 18px; max-width: 9.5em; }
+.contact-h { font-size: clamp(48px, 8vw, 120px); font-weight: 800; line-height: 0.9; margin-top: 0; max-width: 9.5em; }
 .cols { margin-top: var(--mt-space-7); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); border-top: 1px solid var(--mt-border-strong); border-bottom: 1px solid var(--mt-border-strong); }
 .col { padding: 30px 32px 32px; border-left: 1px solid var(--mt-border); display: flex; flex-direction: column; gap: var(--mt-space-3); align-items: flex-start; min-width: 0; }
 .col:first-child { border-left: 0; padding-left: 0; }
@@ -265,6 +295,12 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
   .col { border-left: 0; padding-left: 0; padding-right: 0; }
   .col + .col { border-top: 1px solid var(--mt-border); }
 }
+
+.cols.two { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--mt-space-7); }
+.cols.one { grid-template-columns: minmax(0, 1fr); }
+.cols.one .col { padding-right: 0; }
+@media (max-width: 860px) { .cols.two { grid-template-columns: minmax(0, 1fr); } }
+.sec-head .eyebrow { margin-bottom: calc(-1 * var(--mt-space-2)); }
 
 /* ---------- footer ---------- */
 .foot { border-top: 1px solid var(--mt-border); padding-block: 72px 36px; }
@@ -336,6 +372,7 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
 
 </head>
 <body>
+
 <header class="nav">
   <div class="wrap nav-in">
     <a class="brand" href="#top" aria-label="MTIVE Industries, back to top">
@@ -343,35 +380,84 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
       <svg class="wm" viewBox="550 1265.98 865 356.04" aria-hidden="true"><g fill="currentColor" fill-rule="evenodd"><path d="M598.00 1566.25L598.00 1510.50L594.01 1414.00L590.01 1317.50L590.01 1312.75L590.00 1308.00L594.44 1308.00L598.88 1308.00L599.47 1308.95L600.06 1309.90L611.13 1414.20L622.20 1518.50L632.40 1569.50L642.60 1620.50L672.05 1620.50L701.50 1620.50L711.76 1570.50L722.02 1520.50L733.27 1414.50L744.52 1308.50L748.90 1308.19L753.27 1307.87L754.07 1308.69L754.86 1309.50L750.46 1415.00L746.05 1520.50L746.02 1571.25L746.00 1622.00L770.00 1622.00L794.00 1622.00L794.00 1443.99L794.00 1265.98L753.25 1266.24L712.50 1266.50L700.36 1335.50L688.22 1404.50L683.04 1489.50L677.87 1574.50L677.42 1576.75L676.96 1579.00L672.50 1579.00L668.04 1579.00L667.58 1576.75L667.12 1574.50L661.52 1490.07L655.93 1405.65L644.45 1338.57L632.97 1271.50L632.41 1268.75L631.84 1266.00L590.92 1266.00L550.00 1266.00L550.00 1444.00L550.00 1622.00L574.00 1622.00L598.00 1622.00L598.00 1566.25Z"/><path d="M925.00 1465.00L925.00 1308.00L950.50 1308.00L976.00 1308.00L976.00 1287.00L976.00 1266.00L900.50 1266.00L825.00 1266.00L825.00 1286.98L825.00 1307.97L850.75 1308.23L876.50 1308.50L876.75 1465.25L877.01 1622.00L901.00 1622.00L925.00 1622.00L925.00 1465.00Z"/><path d="M1055.00 1444.00L1055.00 1266.00L1031.00 1266.00L1007.00 1266.00L1007.00 1444.00L1007.00 1622.00L1031.00 1622.00L1055.00 1622.00L1055.00 1444.00Z"/><path d="M1234.19 1444.00L1256.89 1266.50L1256.95 1266.25L1257.00 1266.00L1232.09 1266.00L1207.18 1266.00L1206.58 1269.75L1205.98 1273.50L1194.99 1363.00L1184.01 1452.50L1180.43 1513.50L1176.85 1574.50L1176.40 1576.75L1175.96 1579.00L1171.22 1579.00L1166.47 1579.00L1162.72 1516.62L1158.96 1454.23L1147.48 1360.98L1136.00 1267.73L1136.00 1266.87L1136.00 1266.00L1110.91 1266.00L1085.82 1266.00L1086.41 1269.75L1087.00 1273.50L1109.03 1445.50L1131.07 1617.50L1131.56 1619.76L1132.04 1622.02L1171.77 1621.76L1211.49 1621.50L1234.19 1444.00Z"/><path d="M1415.00 1600.50L1415.00 1579.00L1375.50 1579.00L1336.00 1579.00L1336.00 1521.00L1336.00 1463.00L1373.00 1463.00L1410.00 1463.00L1410.00 1442.01L1410.00 1421.02L1373.25 1420.76L1336.50 1420.50L1336.50 1364.50L1336.50 1308.50L1375.75 1308.24L1415.00 1307.98L1415.00 1286.99L1415.00 1266.00L1351.50 1266.00L1288.00 1266.00L1288.00 1444.00L1288.00 1622.00L1351.50 1622.00L1415.00 1622.00L1415.00 1600.50Z"/></g></svg>
     </a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="#panoptes">PANOPTES</a>
-      <a href="#scanning">Silent scanning</a>
-      <a href="#argus">ARGUS</a>
-      <a href="#control">Control</a>
       <a href="#company">Company</a>
+      <a href="#product">PANOPTES</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
     </nav>
     <a class="btn btn--sm" href="#contact">Request briefing</a>
   </div>
 </header>
 
 <main>
-  <section class="hero" id="top">
+<section class="hero" id="top">
     <div class="hero-art" id="hero-art" aria-hidden="true"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="wrap hero-in">
-      <p class="eyebrow">MTIVE Industries · PANOPTES</p>
-      <h1 class="display">Awareness beyond <span class="dim">the soldier's own senses.</span></h1>
-      <p class="lead">PANOPTES is a helmet- and glasses-mounted perception system for the dismounted soldier. Its 4 sensor channels scan without pause and resolve into a single quiet heads-up display.</p>
+      <h1 class="display">Perception for <span class="dim">the soldier on foot.</span></h1>
+      <p class="lead">MTIVE Industries is a defense technology company. We build AI-powered perception systems that help the dismounted soldier take more calculated steps in a fight.</p>
       <div class="cta-row">
-        <a class="btn" href="#contact">Request briefing</a>
-        <a class="link" href="#scanning">See what each sensor sees ↘</a>
+        <a class="btn" href="#product">See our product</a>
+        <a class="link" href="#contact">Request briefing ↘</a>
       </div>
     </div>
   </section>
 
-  <section class="sec line-top" id="panoptes">
+<section class="sec line-top" id="company">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Product · How PANOPTES is worn</p>
+        <p class="eyebrow">What we do</p>
+        <h2>We help soldiers take more calculated steps in a fight.</h2>
+        <p class="lead">A soldier on foot can only see and hear so far, and can't remember everything that happened. MTIVE builds AI that reads camera, thermal, motion and radar data, shows the soldier only what matters, and keeps a record of every sound and encounter. The decisions stay with the soldier.</p>
+      </div>
+      <div class="grid3">
+        <article class="cell">
+          <h3>Perception systems</h3>
+          <p>PANOPTES is a helmet- and glasses-mounted system. It shows the soldier one quiet heads-up display and saves every sound and encounter along the way.</p>
+        </article>
+        <article class="cell">
+          <h3>Perception AI</h3>
+          <p>ARGUS is MTIVE's onboard AI. It finds people in the camera, thermal, motion and radar data and decides which are worth showing the soldier.</p>
+        </article>
+        <article class="cell">
+          <h3>Made for people on foot</h3>
+          <p>ARGUS is trained to find people from a worn camera at eye level, the view a soldier on foot actually has.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+<section class="sec line-top" id="product">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Our main product</p>
+        <h2>PANOPTES helps the soldier take more calculated steps in a fight.</h2>
+        <p class="lead">PANOPTES is a helmet- and glasses-mounted perception system for the dismounted soldier. It points out the people around them as they move, and saves every sound and encounter they go through, so each next step can build on what already happened.</p>
+      </div>
+    </div>
+  </section>
+
+<section class="xsec" id="see" aria-label="The naked eye compared with PANOPTES">
+    <div class="xray" id="xray">
+      <div class="xr-view" id="xr-eye" aria-hidden="true"></div>
+      <div class="xr-pan" aria-hidden="true">
+        <div class="xr-view" id="xr-pan"></div>
+        <div class="xr-ov" id="xr-ov"></div>
+      </div>
+      <div class="xr-scrim" aria-hidden="true"></div>
+      <div class="xr-line" aria-hidden="true"><span class="xr-tag l">Naked eye</span><span class="xr-tag r">PANOPTES</span></div>
+      <div class="xr-grip" id="xr-grip" role="slider" tabindex="0" aria-label="Compare the naked eye with PANOPTES" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><span aria-hidden="true">&lsaquo;&thinsp;&rsaquo;</span></div>
+      <p class="xr-cap">Drag to compare · Low-light footage, ARGUS v1</p>
+    </div>
+    <div class="wrap xsec-in">
+      <h2>The naked eye sees shadows. PANOPTES sees who is in them.</h2>
+      <p class="lead">Drag the handle across the scene. To its left is what the eye picks up in the dark, to its right is what reaches the soldier's glasses.</p>
+    </div>
+  </section>
+
+<section class="sec line-top" id="panoptes">
+    <div class="wrap">
+      <div class="sec-head">
         <h2>Sensors on the head, compute on the back.</h2>
         <p class="lead">The helmet and glasses carry the sensors and the display. A compact unit on the back does all the processing. A bracelet on the forearm takes the commands.</p>
       </div>
@@ -410,10 +496,9 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
     </div>
   </section>
 
-  <section class="sec line-top" id="scanning">
+<section class="sec line-top" id="scanning">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Display · Silent scanning</p>
         <h2>The display stays quiet until it matters.</h2>
         <p class="lead">Every channel scans the same scene all the time. Open each one to see what it picks up, then compare it with what reaches the soldier's glasses.</p>
       </div>
@@ -527,10 +612,9 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
     </div>
   </section>
 
-  <section class="sec line-top" id="argus">
+<section class="sec line-top" id="argus">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">ARGUS · Measured</p>
         <h2>ARGUS runs in real time and rarely raises a false alarm.</h2>
         <p class="lead">Bench figures for the current model. Full test conditions and accuracy results are shared in briefings.</p>
       </div>
@@ -542,10 +626,9 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
     </div>
   </section>
 
-  <section class="sec line-top" id="control">
+<section class="sec line-top" id="control">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Control · EMG bracelet</p>
         <h2>Control with both hands on the weapon.</h2>
         <p class="lead">An EMG bracelet on the forearm reads muscle signals as gestures. There is nothing to press and nothing to say out loud.</p>
       </div>
@@ -558,13 +641,13 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
     </div>
   </section>
 
-  <section class="sec" id="company" data-theme="paper">
+<section class="sec" id="team" data-theme="paper">
     <div class="wrap">
       <div class="paper-head">
         <div class="sec-head">
-          <p class="eyebrow">Company · MTIVE Industries</p>
+          <p class="eyebrow">Who we are</p>
           <h2>Built for the person on the ground.</h2>
-          <p class="lead">MTIVE Industries is a Turkish defense technology company. It builds AI-powered perception systems that give the dismounted soldier awareness past the reach of eyes and ears.</p>
+          <p class="lead">MTIVE Industries is a defense technology company. These are the people who lead it.</p>
         </div>
         <div class="emblem" id="emblem" aria-hidden="true"></div>
       </div>
@@ -582,19 +665,7 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
           <p>Human-in-the-loop by design. It sharpens the operator's judgement and leaves every decision with the person wearing it.</p>
         </article>
       </div>
-    </div>
-  </section>
-
-  <section class="sec" id="contact">
-    <div class="wrap">
-      <p class="eyebrow">Contact · Briefings by appointment</p>
-      <h2 class="contact-h">Talk to the <span class="dim">people who build it.</span></h2>
-      <div class="cols">
-        <div class="col">
-          <span class="lbl">Briefings</span>
-          <span class="val addr" id="addr">operations@mtive.tech</span>
-          <div class="mail-actions"><a class="btn btn--sm" href="mailto:operations@mtive.tech?subject=PANOPTES%20briefing%20request">Email operations</a><button class="btn btn--ghost btn--sm" type="button" id="copy-addr">Copy address</button></div>
-        </div>
+      <div class="cols two">
         <div class="col">
           <span class="lbl">CTO · AI &amp; Product Engineering</span>
           <span class="val">Aras</span>
@@ -602,6 +673,20 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
         <div class="col">
           <span class="lbl">CEO · Cyber Security Lead</span>
           <span class="val">Alpay</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="sec" id="contact">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2 class="contact-h">Talk to the <span class="dim">people who build it.</span></h2>
+      <div class="cols one">
+        <div class="col">
+          <span class="lbl">Briefings</span>
+          <span class="val addr" id="addr">operations@mtive.tech</span>
+          <div class="mail-actions"><a class="btn btn--sm" href="mailto:operations@mtive.tech?subject=PANOPTES%20briefing%20request">Email operations</a><button class="btn btn--ghost btn--sm" type="button" id="copy-addr">Copy address</button></div>
         </div>
       </div>
     </div>
@@ -617,7 +702,7 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
     </div>
     <div>
       <p class="eyebrow">Company</p>
-      <ul><li><a href="#company">Principles</a></li><li><a href="#contact">Team</a></li><li><a href="#contact">Request briefing</a></li></ul>
+      <ul><li><a href="#company">What we do</a></li><li><a href="#team">Team</a></li><li><a href="#contact">Request briefing</a></li></ul>
     </div>
     <div>
       <p class="eyebrow">Reach</p>
@@ -725,7 +810,53 @@ window.PanoptesScene = (function () {
     g.putImageData(img, 0, 0);
     return (cache[kind] = c.toDataURL('image/png'));
   }
-  return { image };
+
+  // Hero: a night scene laid out for a wide banner, as the naked eye sees it and as PANOPTES
+  // renders it. L places everything in fractions of the banner (u across, v down).
+  function hero(w, h, L) {
+    const AR = w / h, HZ = L.hz, px = L.px * AR, gap = 0.055, wx0 = L.w0 * AR, face = 0.018;
+    const pTop = HZ - L.ph * 0.96, ph = L.ph;
+    const treeH = x => Math.abs(x - px) < gap ? 0.01 + 0.006 * vn(x * 60, 2) : 0.035 + 0.1 * fbm(x * 8 + 1.3, 2.7) + 0.03 * vn(x * 50, 9);
+    function man(x, v) {
+      const X = x - px, y = v - pTop;
+      if (y < -0.01 || y > ph + 0.005) return 0;
+      const hr = ph * 0.105;
+      let d = Math.hypot(X, y - hr) - hr;
+      if (y > hr * 1.9 && y < ph * 0.58) d = Math.min(d, Math.abs(X) - (ph * 0.15 - (y - hr * 2) * 0.1));
+      if (y >= ph * 0.58) d = Math.min(d, Math.abs(X) - ph * 0.1);
+      return 1 - sm(-0.002, 0.004, d);
+    }
+    const mk = () => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); return { c, g, img: g.createImageData(w, h) }; };
+    const E = mk(), P = mk(), de = E.img.data, dp = P.img.data;
+    for (let Y = 0; Y < h; Y++) for (let X = 0; X < w; X++) {
+      const v = (Y + 0.5) / h, x = (X + 0.5) / w * AR, p = man(x, v);
+      let e, q;
+      if (x > wx0 && v > L.wt && v < L.wb) {                     // a wall on the right
+        const side = x < wx0 + face;
+        e = side ? 0.04 : 0.02;
+        q = side ? 0.32 : 0.13 + 0.02 * vn(x * 30, v * 50);
+      } else {
+        if (v < HZ) {                                             // night sky with a glow on the horizon
+          const k2 = Math.pow(Math.max(v, 0) / HZ, 3.2);
+          e = 0.015 + 0.1 * k2; q = 0.02 + 0.36 * k2;
+          if (v > HZ - treeH(x)) { e = 0.006; q = 0.02 + 0.03 * fbm(x * 22, v * 30); }
+        } else {                                                  // ploughed ground running to the horizon
+          const d = (v - HZ) / (1 - HZ), f = 0.5 + 0.5 * Math.cos((x - L.vp * AR) / (d + 0.02) * 12.4), n = fbm(x * 6.7, v * 30);
+          e = 0.008 + 0.03 * (1 - d) * (0.5 + 0.5 * f) + 0.008 * n;
+          q = 0.04 + 0.13 * Math.pow(1 - d, 1.5) * (0.4 + 0.6 * f) + 0.04 * n;
+          q = Math.max(q, 0.85 * blob(x, v, L.gu * AR, L.gv, 0.075, 0.032) * (vn(x * 90, v * 160) > 0.55 ? 1 : 0.3));
+        }
+        e = e * (1 - p) + 0.01 * p;                               // a dark figure the eye barely separates
+        q = Math.max(q * (1 - p), 0.95 * p, 0.3 * blob(x, v, px, pTop + ph * 0.45, 0.05, ph * 0.62));
+      }
+      const i = (Y * w + X) * 4, a = Math.round(clamp(e, 0, 1) * 255), b = Math.round(clamp(q, 0, 1) * 255);
+      de[i] = de[i + 1] = de[i + 2] = a; de[i + 3] = 255;
+      dp[i] = dp[i + 1] = dp[i + 2] = b; dp[i + 3] = 255;
+    }
+    E.g.putImageData(E.img, 0, 0); P.g.putImageData(P.img, 0, 0);
+    return { eye: E.c.toDataURL('image/png'), pan: P.c.toDataURL('image/png') };
+  }
+  return { image, hero };
 })();
 </script>
 <script>
@@ -767,9 +898,191 @@ window.PanoptesScene = (function () {
     });
   });
 
+
+  /* ---------- the naked eye against PANOPTES, split by a handle ---------- */
+  function makeXray(ht) {
+    const box = document.getElementById('xray'), sec = document.getElementById('see');
+    const eyeEl = document.getElementById('xr-eye'), panEl = document.getElementById('xr-pan');
+    const ov = document.getElementById('xr-ov'), grip = document.getElementById('xr-grip');
+    const mq = window.matchMedia('(max-width: 760px)'), still = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+    const frames = n => new Promise(r => { const f = k => k ? requestAnimationFrame(() => f(k - 1)) : r(); f(n); });
+    let L = null, pos = 1, touched = false, anim = 0, marks = [], mounted = null, drag = null, rt = 0;
+    /* Real thermal footage replaces the generated scene. Both videos share one frame count and are
+       kept in step: the left is the same footage dimmed to what the eye gets, the right carries the
+       ARGUS v1 detections drawn into the frames. */
+    let vids = null;
+    function mountVideos() {
+      if (vids) return Promise.resolve();
+      const mk = (src, label) => {
+        const v = document.createElement('video');
+        v.className = 'xr-vid'; v.src = src; v.muted = true; v.defaultMuted = true; v.loop = true;
+        v.playsInline = true; v.preload = 'auto'; v.setAttribute('aria-label', label); v.setAttribute('role', 'img');
+        return v;
+      };
+      const eye = mk('video/prison_eye.mp4', 'Dark stairwell as the naked eye sees it'), pan = mk('video/prison_pan.mp4', 'The same scene through PANOPTES, people boxed');
+      eyeEl.appendChild(eye); panEl.appendChild(pan);
+      vids = { eye, pan, on: false };
+      const follow = () => { if (Math.abs(eye.currentTime - pan.currentTime) > 0.07) eye.currentTime = pan.currentTime; };
+      const tick = () => { if (!vids.on) return; follow(); (pan.requestVideoFrameCallback ? pan.requestVideoFrameCallback.bind(pan) : requestAnimationFrame)(tick); };
+      const play = () => {
+        if (still.matches || vids.on) return;
+        vids.on = true; pan.play().catch(() => {}); eye.play().catch(() => {}); tick();
+      };
+      const stop = () => { vids.on = false; pan.pause(); eye.pause(); };
+      if (still.matches) {
+        const rest = () => { eye.currentTime = pan.currentTime = 9; };
+        pan.addEventListener('loadeddata', rest, { once: true }); eye.addEventListener('loadeddata', rest, { once: true });
+      } else if ('IntersectionObserver' in window) {
+        new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? play() : stop())), { threshold: 0.1 }).observe(box);
+      } else play();
+      return Promise.all([pan, eye].map(v => v.readyState >= 2 ? 0 : new Promise(r => { v.addEventListener('loadeddata', r, { once: true }); setTimeout(r, 4000); })));
+    }
+
+    // Layout: the copy keeps the left; the detections sit in the free space to its right.
+    function measure() {
+      const r = box.getBoundingClientRect(), W = r.width, Hh = r.height, nar = mq.matches;
+      let t = 0.4;
+      if (!nar) {
+        let right = 0;
+        sec.querySelectorAll('.xsec-in h2, .xsec-in .lead').forEach(n => {
+          const g = document.createRange(); g.selectNodeContents(n);
+          for (const c of g.getClientRects()) right = Math.max(right, c.right);
+        });
+        t = clamp((right - r.left + 32) / W, 0.45, 0.74);
+      }
+      const Z = 1 - t, hz = nar ? 0.5 : 0.55;
+      return { W, Hh, AR: W / Hh, t, hz, ph: nar ? 0.21 : 0.15, px: t + 0.22 * Z, vp: t + 0.25 * Z, gu: t + 0.48 * Z,
+               gv: hz + (nar ? 0.24 : 0.2), w0: t + 0.66 * Z, wt: hz - 0.24, wb: nar ? 0.98 : 0.94, bu: t + 0.83 * Z };
+    }
+    function drawMarks() {
+      ov.innerHTML = ''; marks = []; return;   // the footage carries its own boxes
+      const A = L.AR, pt = L.hz - L.ph * 0.96, pw = L.ph * 0.42 / A, pc = n => (n * 100).toFixed(2) + '%';
+      const list = [
+        ['bx--ok', L.px - pw / 2, pt - 0.015, pw, L.ph + 0.03, 'Confirmed', 'CAM + IR', ''],
+        ['bx--pend', L.gu - 0.09 / A, L.gv - 0.04, 0.18 / A, 0.08, 'Unconfirmed', 'Motion', ' below'],
+        ['bx--pend r', L.bu - 0.04 / A, L.hz - 0.19, 0.08 / A, 0.21, 'Unconfirmed', 'Radar', ' below']
+      ];
+      box.classList.toggle('tight', (1 - L.t) * L.W < 420);   // a narrow band keeps only the status words
+      ov.innerHTML = list.map(([c, l, t, w, h, a, b, lc]) => '<div class="bx ' + c + '" style="left:' + pc(l) + ';top:' + pc(t) + ';width:' + pc(w) + ';height:' + pc(h) + '"><span class="lb' + lc + '"><i class="m"></i>' + a + '<span class="x">· ' + b + '</span></span></div>').join('');
+      marks = [...ov.children].map((el, i) => ({ el, left: list[i][1], seen: false }));
+      lock();
+    }
+    // A box locks on the moment PANOPTES fully uncovers it.
+    function lock() {
+      marks.forEach(m => {
+        const seen = pos <= m.left;
+        if (seen && !m.seen) { m.el.classList.remove('lock'); void m.el.offsetWidth; m.el.classList.add('lock'); }
+        m.seen = seen;
+      });
+    }
+    function set(p) {
+      pos = clamp(p, 0, 1);
+      box.style.setProperty('--pos', pos.toFixed(4));
+      grip.setAttribute('aria-valuenow', String(Math.round(pos * 100)));
+      grip.setAttribute('aria-valuetext', Math.round((1 - pos) * 100) + ' percent of the view through PANOPTES');
+      lock();
+    }
+    function paint() {
+      return mountVideos();
+      const gw = Math.round(clamp(L.W / 2, 240, 760)), gh = Math.max(120, Math.round(gw / L.AR));
+      const im = window.PanoptesScene.hero(gw, gh, L), pitch = mq.matches ? 4 : 6;
+      const decode = u => { const i = new Image(); i.src = u; return i.decode ? i.decode().catch(() => {}) : Promise.resolve(); };
+      return Promise.all([decode(im.eye), decode(im.pan)]).then(() => {
+        if (ht) {
+          ht(eyeEl, { src: im.eye, shape: 'dot', pitch, warp: 0, fade: 'none', 'aria-label': 'A night scene as the naked eye sees it' });
+          ht(panEl, { src: im.pan, shape: 'dot', pitch, warp: 0, fade: 'none', 'aria-label': 'The same scene through PANOPTES' });
+        } else {
+          eyeEl.style.backgroundImage = 'url(' + im.eye + ')'; panEl.style.backgroundImage = 'url(' + im.pan + ')';
+        }
+      });
+    }
+    function layout() {
+      L = measure();
+      sec.style.setProperty('--t', L.t.toFixed(3));
+      drawMarks();
+      return paint();
+    }
+    function mount() { if (!mounted) mounted = layout().then(() => frames(3)); return mounted; }
+    // PANOPTES switches on: the handle sweeps in from the right and each box locks on as it is uncovered.
+    function start() {
+      return mount().then(() => {
+        relayout();
+        if (touched) return;
+        if (still.matches) { set(L.t); return; }
+        const from = pos, t0 = performance.now(), D = 1500;
+        cancelAnimationFrame(anim);
+        const step = now => {
+          if (touched) return;
+          const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3);
+          set(from + (L.t - from) * e);
+          if (k < 1) anim = requestAnimationFrame(step);
+        };
+        anim = requestAnimationFrame(step);
+      });
+    }
+    function relayout() {
+      if (!mounted || !L) return;
+      const n = measure();
+      if (Math.abs(n.W - L.W) / L.W < 0.03 && Math.abs(n.Hh - L.Hh) / L.Hh < 0.03 && Math.abs(n.t - L.t) < 0.012) return;
+      const rest = !touched && Math.abs(pos - L.t) < 0.002;
+      L = n; sec.style.setProperty('--t', L.t.toFixed(3));
+      drawMarks(); paint();
+      if (rest) set(L.t);
+    }
+
+    const at = e => { const r = box.getBoundingClientRect(); return (e.clientX - r.left) / r.width; };
+    function grab(e) {
+      touched = true; cancelAnimationFrame(anim); box.classList.add('drag');
+      try { box.setPointerCapture(e.pointerId); } catch (_) {}
+      set(at(e));
+    }
+    box.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      drag = { id: e.pointerId, x: e.clientX, y: e.clientY, on: e.pointerType === 'mouse' };
+      if (drag.on) { e.preventDefault(); grab(e); }
+    });
+    box.addEventListener('pointermove', e => {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (!drag.on) {                                  // touch: only a sideways drag moves the handle, a vertical one scrolls
+        const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+        if (Math.abs(dx) < 6 || Math.abs(dx) < Math.abs(dy)) return;
+        drag.on = true; grab(e); return;
+      }
+      set(at(e));
+    });
+    const end = () => { drag = null; box.classList.remove('drag'); };
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(t => box.addEventListener(t, end));
+    grip.addEventListener('keydown', e => {
+      const k = { ArrowLeft: -0.05, ArrowDown: -0.05, ArrowRight: 0.05, ArrowUp: 0.05 }[e.key];
+      if (k === undefined && e.key !== 'Home' && e.key !== 'End') return;
+      e.preventDefault(); touched = true; cancelAnimationFrame(anim);
+      set(e.key === 'Home' ? 0 : e.key === 'End' ? 1 : pos + k);
+    });
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(relayout, 220); });
+    // Web fonts change the width of the headline; re-fit once they are in, never while the opening plays.
+    const whenFree = fn => document.documentElement.classList.contains('intro-mark') ? setTimeout(() => whenFree(fn), 400) : fn();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => whenFree(relayout));
+    return { mount, start };
+  }
+  function armXray(X, after) {
+    const run = after || (fn => fn()), idle = window.requestIdleCallback || (fn => setTimeout(fn, 300));
+    run(() => idle(() => X.mount()));
+    if (!('IntersectionObserver' in window)) { run(() => X.start()); return; }
+    const io = new IntersectionObserver(es => {
+      if (!es.some(e => e.isIntersecting)) return;
+      io.disconnect(); run(() => X.start());
+    }, { threshold: 0.6 });
+    io.observe(document.getElementById('xray'));
+  }
+
   /* ---------- the brand Halftone, from the design system bundle ---------- */
   const NS = window.MTIVEDesignSystem_6c1254, H = NS && NS.Halftone;
-  if (!H || !window.React || !window.ReactDOM) { document.documentElement.classList.add('no-ht'); document.documentElement.classList.remove('intro', 'intro-mark'); return; }
+  if (!H || !window.React || !window.ReactDOM) {
+    document.documentElement.classList.add('no-ht'); document.documentElement.classList.remove('intro', 'intro-mark');
+    if (window.PanoptesScene) armXray(makeXray(null));
+    return;
+  }
   const h = React.createElement;
   const render = (el, props) => { const root = el._root || (el._root = ReactDOM.createRoot(el)); root.render(h(H, props)); };
 
@@ -781,7 +1094,6 @@ window.PanoptesScene = (function () {
     narrow.matches ? { pitch: 5, fade: 'bottom', fadeLength: 0.45 } : { pitch: 6, fade: 'left', fadeLength: 0.5 },
     { waveShape: 'none', renderScale: scale, 'aria-label': 'A sheet of halftone lines' });
   const sync = (el, props) => { const r = el._root || (el._root = ReactDOM.createRoot(el)); ReactDOM.flushSync(() => r.render(h(H, props))); };
-  const frame = () => new Promise(res => requestAnimationFrame(() => requestAnimationFrame(res)));
   const wait = ms => new Promise(res => setTimeout(res, ms));
   const settle = () => render(heroEl, calmProps(undefined));
   (narrow.addEventListener ? narrow.addEventListener('change', settle) : narrow.addListener(settle));
@@ -921,6 +1233,9 @@ window.PanoptesScene = (function () {
   const later = [];
   const afterIntro = fn => { if (introRunning) later.push(fn); else fn(); };
   if (document.documentElement.classList.contains('intro')) { introRunning = true; intro(); } else settle();
+
+  // The comparison band: drawn once the opening is over, switched on when it scrolls into view.
+  armXray(makeXray(render), afterIntro);
 
   // Paper band: the MTIVE mark floating in black lines (the brand's small-emblem settings).
   afterIntro(() => render(document.getElementById('emblem'), { mode: 'surface', theme: 'paper', shape: 'line', pitch: 4.5, warp: 0.6, wave: 340, tilt: 36, lift: 0.3, waveShape: 'mark', shapeY: 0.56, shapeSize: 0.48, fade: 'radial', fadeLength: 0.4, 'aria-label': 'The MTIVE mark floating in a sheet of black halftone lines' }));

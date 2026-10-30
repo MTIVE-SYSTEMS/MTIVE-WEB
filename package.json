@@ -3,6 +3,6 @@
   "private": true,
   "description": "MTIVE Industries site (PANOPTES). Static files; the build copies them and the fonts already in public/ into dist/.",
   "scripts": {
-    "build": "rm -rf dist && mkdir -p dist/fonts dist/assets && cp index.html favicon.svg banner.svg bundle.js dist/ && cp public/fonts/BigShoulders_60pt-Medium.ttf public/fonts/BigShoulders_60pt-SemiBold.ttf public/fonts/BigShoulders_60pt-Bold.ttf public/fonts/BigShoulders_60pt-ExtraBold.ttf public/fonts/BigShoulders-Regular.ttf public/fonts/BigShoulders-Medium.ttf dist/fonts/ && cp public/assets/halftone-background.jpg dist/assets/"
+    "build": "rm -rf dist && mkdir -p dist/fonts dist/assets dist/video && cp index.html favicon.svg banner.svg bundle.js dist/ && cp public/fonts/BigShoulders_60pt-Medium.ttf public/fonts/BigShoulders_60pt-SemiBold.ttf public/fonts/BigShoulders_60pt-Bold.ttf public/fonts/BigShoulders_60pt-ExtraBold.ttf public/fonts/BigShoulders-Regular.ttf public/fonts/BigShoulders-Medium.ttf dist/fonts/ && cp public/assets/halftone-background.jpg dist/assets/ && cp public/video/prison_pan.mp4 public/video/prison_eye.mp4 dist/video/"
   }
 }
