@@ -145,6 +145,9 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
 .xr-view { position: absolute; inset: 0; background: var(--mt-bg-1) center / cover no-repeat; }
 .xr-pan { position: absolute; inset: 0; clip-path: inset(0 0 0 calc(var(--pos) * 100%)); }
 .xr-ov { position: absolute; inset: 0; pointer-events: none; }
+.xr-credit { font-family: var(--mt-font-mono); font-size: 11px; line-height: 1.6; letter-spacing: 0.04em; color: var(--mt-fg-4); max-width: 36em; pointer-events: auto; overflow-wrap: anywhere; }
+.xr-credit a { color: var(--mt-fg-3); border-bottom: 1px solid var(--mt-border-strong); }
+.xr-credit a:hover { color: var(--mt-fg-1); }
 .xr-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: var(--mt-bg-1); }
 .xray.tight .lb .x { display: none; }
 .xr-ov .bx.lock { animation: xr-lock 560ms var(--mt-ease-enter) both; }
@@ -452,6 +455,7 @@ p { margin: 0; color: var(--mt-fg-2); max-width: var(--mt-measure); }
     <div class="wrap xsec-in">
       <h2>The naked eye sees shadows. PANOPTES sees who is in them.</h2>
       <p class="lead">Drag the handle across the scene. To its left is what the eye picks up in the dark, to its right is what reaches the soldier's glasses.</p>
+      <p class="xr-credit">Source footage: "Airsoft inside a prison" by Names Nicco, <a href="https://www.youtube.com/watch?v=H7XcAX9JQN8" target="_blank" rel="noopener">https://www.youtube.com/watch?v=H7XcAX9JQN8</a>. Licensed under Creative Commons Attribution (CC BY), checked 2026-10-30. Overlay (ARGUS detections, grayscale conversion) added by MTIVE. Not endorsed by the original author.</p>
     </div>
   </section>
 
